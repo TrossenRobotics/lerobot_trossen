@@ -44,6 +44,7 @@ from trossen_lerobot.robots.utils import make_robot_from_config
 
 @draccus.wrap()
 def replay(cfg: ReplayConfig):
+    """Copied from lerobot.replay, modified to work with Trossen LeRobot."""
     init_logging()
     logging.info(pformat(asdict(cfg)))
 
