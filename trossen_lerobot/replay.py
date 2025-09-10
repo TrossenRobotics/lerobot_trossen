@@ -16,7 +16,7 @@ Example replay with bimanual WidowX AI arms:
 
 ```shell
 python -m trossen_lerobot.replay \
-  --robot.type=bi_widowxai_leader \
+  --robot.type=bi_widowxai_follower \
   --robot.left_arm_ip_address=192.168.1.5 \
   --robot.right_arm_ip_address=192.168.1.4 \
   --robot.id=bimanual_follower \

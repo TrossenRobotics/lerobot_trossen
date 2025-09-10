@@ -60,7 +60,7 @@ uv run trossen_lerobot.record \
 
 ### Replay Script
 
-To replay an episode from a dataset on, say, the Trossen AI Solo Kit, run:
+To replay an episode from a dataset on, say, a WidowX AI follower arm, run:
 
 ```bash
 uv run -m trossen_lerobot.replay \
