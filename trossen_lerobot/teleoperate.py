@@ -4,24 +4,24 @@ Simple script to control a robot from teleoperation.
 Example:
 
 ```shell
-python -m lerobot.teleoperate \
+python -m trossen_lerobot.teleoperate \
     --robot.type=widowxai_follower \
     --robot.ip_address=192.168.1.4 \
     --robot.cameras='{}' \
-    --robot.id=black \
+    --robot.id=follower \
     --teleop.type=widowxai_leader \
     --teleop.ip_address=192.168.1.2 \
-    --teleop.id=blue \
+    --teleop.id=leader \
     --display_data=false
 ```
 
 Example teleoperation with bimanual WidowX AI arms:
 
 ```shell
-python -m lerobot.teleoperate \
+python -m trossen_lerobot.teleoperate \
     --robot.type=bi_widowxai_follower \
-    --robot.left_arm_ip_address=192.168.1.4 \
-    --robot.right_arm_ip_address=192.168.1.5 \
+    --robot.left_arm_ip_address=192.168.1.5 \
+    --robot.right_arm_ip_address=192.168.1.4 \
     --robot.id=bimanual_follower \
     --robot.cameras='{}' \
     --teleop.type=bi_widowxai_leader \
@@ -30,7 +30,6 @@ python -m lerobot.teleoperate \
     --teleop.id=bimanual_leader \
     --display_data=false
 ```
-
 """
 
 import logging

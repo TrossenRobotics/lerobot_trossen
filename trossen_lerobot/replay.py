@@ -4,27 +4,25 @@ Replays the actions of an episode from a dataset on a robot.
 Examples:
 
 ```shell
-python -m lerobot.replay \
+python -m trossen_lerobot.replay \
     --robot.type=widowxai_follower \
     --robot.ip_address=192.168.1.4 \
-    --robot.id=black \
-    --dataset.repo_id=${HF_USER}/widowxai-handover-cube \
+    --robot.id=follower \
+    --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
     --dataset.episode=2
 ```
-
 
 Example replay with bimanual WidowX AI arms:
 
 ```shell
-python -m lerobot.replay \
+python -m trossen_lerobot.replay \
   --robot.type=bi_widowxai_leader \
-  --robot.left_arm_ip_address=192.168.1.4 \
+  --robot.left_arm_ip_address=192.168.1.5 \
   --robot.right_arm_ip_address=192.168.1.4 \
   --robot.id=bimanual_follower \
   --dataset.repo_id=${HF_USER}/bimanual-widowxai-handover-cube \
   --dataset.episode=0
 ```
-
 """
 
 import logging

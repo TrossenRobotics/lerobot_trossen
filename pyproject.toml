@@ -24,22 +24,8 @@ exclude = ["venv", "build", "dist", ".git", ".ipynb"]
 line-length = 99
 
 [tool.ruff.lint]
-# E, W: pycodestyle errors and warnings
-# F: PyFlakes
-# I: isort
-# UP: pyupgrade
-# B: flake8-bugbear (good practices, potential bugs)
-# C4: flake8-comprehensions (more concise comprehensions)
-# A: flake8-builtins (shadowing builtins)
-# SIM: flake8-simplify
-# RUF: Ruff-specific rules
-# D: pydocstyle (for docstring style/formatting)
-# S: flake8-bandit (some security checks, complements Bandit)
-# T20: flake8-print (discourage print statements in production code)
-# N: pep8-naming
-# TODO: Uncomment rules when ready to use
 select = [
-    "E", "W", "F", "I", "B", "C4", "T20", "N" # "SIM", "A", "S", "D", "RUF", "UP"
+    "E", "W", "F", "I", "B", "C4", "T20", "N"
 ]
 
 [tool.ruff.lint.per-file-ignores]
