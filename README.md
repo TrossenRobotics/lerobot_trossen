@@ -65,7 +65,7 @@ uv run -m trossen_lerobot.record \
 uv run -m trossen_lerobot.record \
   --robot.type=widowxai_follower \
   --robot.ip_address=192.168.1.4 \
-  --robot.cameras="{cam_high: {type: opencv, camera_index: 0, width: 640, height: 480}}" \
+  --robot.cameras="{cam_high: {type: opencv, index_or_path: 0, width: 640, height: 480}}" \
   --robot.id=bimanual_follower \
   --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
   --dataset.num_episodes=2 \
