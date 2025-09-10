@@ -27,8 +27,6 @@ We provide drop-in replacements for the main scripts in the `lerobot` package:
 
 ### Teleoperate Script
 
-To teleoperate, say, the Trossen AI Solo Kit, run:
-
 ```shell
 uv run -m trossen_lerobot.teleoperate \
     --robot.type=widowxai_follower \
@@ -41,8 +39,6 @@ uv run -m trossen_lerobot.teleoperate \
 ```
 
 ### Record Script
-
-To record a dataset on, say, the Trossen AI Stationary Kit, run:
 
 ```shell
 uv run -m trossen_lerobot.record \
@@ -66,7 +62,7 @@ uv run -m trossen_lerobot.record \
 ### Model Eval (Record with Policy) Script
 
 ```shell
-python -m trossen_lerobot.record \
+uv run -m trossen_lerobot.record \
   --robot.type=widowxai_follower \
   --robot.ip_address=192.168.1.4 \
   --robot.cameras="{cam_high: {type: opencv, camera_index: 0, width: 640, height: 480}}" \
@@ -78,8 +74,6 @@ python -m trossen_lerobot.record \
 ```
 
 ### Replay Script
-
-To replay an episode from a dataset on, say, a WidowX AI follower arm, run:
 
 ```shell
 uv run -m trossen_lerobot.replay \
