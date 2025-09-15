@@ -64,6 +64,8 @@ uv run -m trossen_lerobot.record \
 ```
 
 Record 10 episodes of a cube pickup task with a single WidowX AI robot using the RealSense camera interface.
+This dataset will be pushed to the Hugging Face Hub after recording.
+
 
 ```shell
 uv run -m trossen_lerobot.record \
@@ -77,9 +79,20 @@ uv run -m trossen_lerobot.record \
   --teleop.ip_address=192.168.1.2 \
   --teleop.id=bimanual_leader \
   --display_data=true \
+  --control.push_to_hub=true \
   --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
   --dataset.num_episodes=10 \
   --dataset.single_task="Grab the cube"
+```
+
+## Dataset Visualization
+
+If you uploaded your dataset to the Hugging Face Hub using ``--control.push_to_hub=true``, you can [visualize your dataset online](https://huggingface.co/spaces/lerobot/visualize_dataset).
+To do so, copy and paste your repository ID into the provided field.
+Your repository ID follows the format:
+
+```
+<huggingface-username>/<dataset-id>
 ```
 
 ### Model Eval (Record with Policy) Script
