@@ -3,6 +3,7 @@
 ## Overview
 
 This package contains LeRobot integrations for the Trossen AI series of robots.
+See the [LeRobot documentation](https://huggingface.co/docs/lerobot) for details on more advanced usage like training your own models and using different teleoperation methods.
 
 ## Installation
 
@@ -43,6 +44,7 @@ uv run -m trossen_lerobot.teleoperate \
 ### Record Script
 
 Record 25 episodes of a bimanual handover task with two WidowX AI robots using the OpenCV camera interface.
+Datasets are pushed to the Hugging Face Hub after recording by default.
 
 ```shell
 uv run -m trossen_lerobot.record \
@@ -64,7 +66,7 @@ uv run -m trossen_lerobot.record \
 ```
 
 Record 10 episodes of a cube pickup task with a single WidowX AI robot using the RealSense camera interface.
-This dataset will be pushed to the Hugging Face Hub after recording.
+This dataset will not be pushed to the Hugging Face Hub after recording.
 
 
 ```shell
@@ -79,7 +81,7 @@ uv run -m trossen_lerobot.record \
   --teleop.ip_address=192.168.1.2 \
   --teleop.id=bimanual_leader \
   --display_data=true \
-  --control.push_to_hub=true \
+  --control.push_to_hub=false \
   --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
   --dataset.num_episodes=10 \
   --dataset.single_task="Grab the cube"
