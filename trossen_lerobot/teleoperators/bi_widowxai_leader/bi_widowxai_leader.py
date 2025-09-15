@@ -101,6 +101,7 @@ class BiWidowXAILeader(Teleoperator):
             if key.startswith("right_")
         }
 
+        # Note that feedback is currently not implemented upstream huggingface/lerobot.
         if left_feedback:
             self.left_arm.send_feedback(left_feedback)
         if right_feedback:
