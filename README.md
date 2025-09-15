@@ -27,6 +27,8 @@ We provide drop-in replacements for the main scripts in the `lerobot` package:
 
 ### Teleoperate Script
 
+Teleoperate a WidowX AI robot with another WidowX AI robot.
+
 ```shell
 uv run -m trossen_lerobot.teleoperate \
     --robot.type=widowxai_follower \
@@ -39,6 +41,8 @@ uv run -m trossen_lerobot.teleoperate \
 ```
 
 ### Record Script
+
+Record 25 episodes of a bimanual handover task with two WidowX AI robots using the OpenCV camera interface.
 
 ```shell
 uv run -m trossen_lerobot.record \
@@ -59,7 +63,28 @@ uv run -m trossen_lerobot.record \
   --dataset.single_task="Grab and handover the red cube to the other arm"
 ```
 
+Record 10 episodes of a cube pickup task with a single WidowX AI robot using the RealSense camera interface.
+
+```shell
+uv run -m trossen_lerobot.record \
+  --robot.type=widowxai_follower \
+  --robot.ip_address=192.168.1.4 \
+  --robot.id=bimanual_follower \
+  --robot.cameras="{
+    wrist: {type: intelrealsense, serial_number_or_name: "0123456789", width: 640, height: 480, fps: 30}
+  }" \
+  --teleop.type=widowxai_leader \
+  --teleop.ip_address=192.168.1.2 \
+  --teleop.id=bimanual_leader \
+  --display_data=true \
+  --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
+  --dataset.num_episodes=10 \
+  --dataset.single_task="Grab the cube"
+```
+
 ### Model Eval (Record with Policy) Script
+
+Evaluate a trained policy by recording 2 episodes of a cube pickup task with a single WidowX AI robot using the OpenCV camera interface.
 
 ```shell
 uv run -m trossen_lerobot.record \
@@ -74,6 +99,8 @@ uv run -m trossen_lerobot.record \
 ```
 
 ### Replay Script
+
+Replay episode 2 of a cube pickup task with a single WidowX AI robot.
 
 ```shell
 uv run -m trossen_lerobot.replay \
