@@ -49,6 +49,7 @@ class BiWidowXAILeader(Teleoperator):
     @cached_property
     def feedback_features(self) -> dict[str, type]:
         # TODO(lukeschmitt-tr): Implement force feedback
+        # Note that feedback is currently not implemented upstream huggingface/lerobot.
         return {}
 
     @property
@@ -88,6 +89,7 @@ class BiWidowXAILeader(Teleoperator):
         return action_dict
 
     def send_feedback(self, feedback: dict[str, float]) -> None:
+        # Note that feedback is currently not implemented upstream huggingface/lerobot.
         # Remove "left_" prefix
         left_feedback = {
             key.removeprefix("left_"): value

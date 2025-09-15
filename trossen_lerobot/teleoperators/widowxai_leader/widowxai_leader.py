@@ -32,6 +32,7 @@ class WidowXAILeader(Teleoperator):
     @property
     def feedback_features(self) -> dict[str, type]:
         # TODO(lukeschmitt-tr): Implement force feedback
+        # Note that feedback is currently not implemented upstream huggingface/lerobot.
         return {}
 
     @property
@@ -96,6 +97,7 @@ class WidowXAILeader(Teleoperator):
 
     def send_feedback(self, feedback: dict[str, float]) -> None:
         # TODO(lukeschmitt-tr): Implement force feedback
+        # Note that feedback is currently not implemented upstream huggingface/lerobot.
         raise NotImplementedError
 
     def disconnect(self) -> None:
