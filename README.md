@@ -3,7 +3,7 @@
 ## Overview
 
 This package contains LeRobot integrations for the Trossen AI series of robots.
-See the [LeRobot documentation](https://huggingface.co/docs/lerobot) for details on more advanced usage like training your own models and using different teleoperation methods.
+See the [LeRobot documentation](https://huggingface.co/docs/lerobot) for details on more advanced usage like using the HuggingFace Hub, model training, and using different teleoperation methods.
 
 ## Installation
 
@@ -43,8 +43,29 @@ uv run -m trossen_lerobot.teleoperate \
 
 ### Record Script
 
+Record 10 episodes of a cube pickup task with a single WidowX AI robot using the RealSense camera interface.
+This dataset will not be pushed to the Hugging Face Hub after recording.
+
+```shell
+uv run -m trossen_lerobot.record \
+  --robot.type=widowxai_follower \
+  --robot.ip_address=192.168.1.4 \
+  --robot.id=bimanual_follower \
+  --robot.cameras="{
+    wrist: {type: intelrealsense, serial_number_or_name: "0123456789", width: 640, height: 480, fps: 30}
+  }" \
+  --teleop.type=widowxai_leader \
+  --teleop.ip_address=192.168.1.2 \
+  --teleop.id=bimanual_leader \
+  --display_data=true \
+  --control.push_to_hub=false \
+  --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
+  --dataset.num_episodes=10 \
+  --dataset.single_task="Grab the cube"
+```
+
 Record 25 episodes of a bimanual handover task with two WidowX AI robots using the OpenCV camera interface.
-Datasets are pushed to the Hugging Face Hub after recording by default.
+Datasets are pushed to the Hugging Face Hub after recording by default - make sure to set the `HF_USER` environment variable and be logged in with the `huggingface-cli login` command before running this script.
 
 ```shell
 uv run -m trossen_lerobot.record \
@@ -63,28 +84,6 @@ uv run -m trossen_lerobot.record \
   --dataset.repo_id=${HF_USER}/bimanual-widowxai-handover-cube \
   --dataset.num_episodes=25 \
   --dataset.single_task="Grab and handover the red cube to the other arm"
-```
-
-Record 10 episodes of a cube pickup task with a single WidowX AI robot using the RealSense camera interface.
-This dataset will not be pushed to the Hugging Face Hub after recording.
-
-
-```shell
-uv run -m trossen_lerobot.record \
-  --robot.type=widowxai_follower \
-  --robot.ip_address=192.168.1.4 \
-  --robot.id=bimanual_follower \
-  --robot.cameras="{
-    wrist: {type: intelrealsense, serial_number_or_name: "0123456789", width: 640, height: 480, fps: 30}
-  }" \
-  --teleop.type=widowxai_leader \
-  --teleop.ip_address=192.168.1.2 \
-  --teleop.id=bimanual_leader \
-  --display_data=true \
-  --control.push_to_hub=false \
-  --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
-  --dataset.num_episodes=10 \
-  --dataset.single_task="Grab the cube"
 ```
 
 ## Dataset Visualization
