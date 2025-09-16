@@ -58,7 +58,7 @@ uv run -m trossen_lerobot.record \
   --teleop.ip_address=192.168.1.2 \
   --teleop.id=bimanual_leader \
   --display_data=true \
-  --control.push_to_hub=false \
+  --dataset.push_to_hub=false \
   --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
   --dataset.num_episodes=10 \
   --dataset.single_task="Grab the cube"
@@ -74,7 +74,7 @@ uv run -m trossen_lerobot.record \
   --robot.right_arm_ip_address=192.168.1.4 \
   --robot.id=bimanual_follower \
   --robot.cameras='{
-    cam_low: {"type": "opencv", "index_or_path": 0, "width": 640, "height": 480, "fps": 30},
+    cam_low: {"type": "opencv", "index_or_path": "0", "width": 640, "height": 480, "fps": 30},
   }' \
   --teleop.type=bi_widowxai_leader \
   --teleop.left_arm_ip_address=192.168.1.3 \
