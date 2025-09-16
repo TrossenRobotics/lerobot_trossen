@@ -1,0 +1,40 @@
+[project]
+name = "trossen_lerobot"
+version = "0.1.0"
+description = "Trossen Robotics LeRobot integration."
+authors = [
+    { name = "Trossen Robotics" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "lerobot[intelrealsense]>=0.3.2",
+    "trossen_arm>=1.8.5",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["trossen_lerobot"]
+
+[tool.ruff]
+exclude = ["venv", "build", "dist", ".git", ".ipynb"]
+line-length = 99
+
+[tool.ruff.lint]
+select = [
+    "E", "W", "F", "I", "B", "C4", "T20", "N"
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "F403"]
+
+[tool.isort]
+profile = "black"
+force_single_line = false
+line_length = 99
+lexicographical = true
+known_first_party = ["trossen_lerobot"]
+force_sort_within_sections = true
