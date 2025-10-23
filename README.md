@@ -1,4 +1,4 @@
-# trossen_lerobot
+# LeRobot Trossen Integration
 
 ## Overview
 
@@ -13,29 +13,28 @@ Follow the instructions [here](https://docs.astral.sh/uv/getting-started/install
 Run the following command to install this package and its dependencies:
 
 ```shell
+# Install the trossen lerobot packages and their dependencies
 uv sync
-# or
-uv pip install -e .
+
+# Verify installation
+uv pip list | grep trossen
+# lerobot-robot-trossen
+# lerobot-teleoperator-trossen
+# trossen-arm
 ```
 
 ## Usage
 
-We provide drop-in replacements for the main scripts in the `lerobot` package:
-
-* teleoperate.py
-* record.py
-* replay.py
-
-### Teleoperate Script
+### Teleoperation Script
 
 Teleoperate a WidowX AI robot with another WidowX AI robot.
 
 ```shell
-uv run -m trossen_lerobot.teleoperate \
-    --robot.type=widowxai_follower \
+uv run lerobot-teleoperate \
+    --robot.type=widowxai_follower_robot_robot \
     --robot.ip_address=192.168.1.4 \
     --robot.id=follower \
-    --teleop.type=widowxai_leader \
+    --teleop.type=widowxai_leader_teleop \
     --teleop.ip_address=192.168.1.2 \
     --teleop.id=leader \
     --display_data=false
@@ -47,16 +46,16 @@ Record 10 episodes of a cube pickup task with a single WidowX AI robot using the
 This dataset will not be pushed to the Hugging Face Hub after recording.
 
 ```shell
-uv run -m trossen_lerobot.record \
-  --robot.type=widowxai_follower \
+uv run lerobot-record \
+  --robot.type=widowxai_follower_robot \
   --robot.ip_address=192.168.1.4 \
-  --robot.id=bimanual_follower \
+  --robot.id=follower \
   --robot.cameras="{
     wrist: {type: intelrealsense, serial_number_or_name: "0123456789", width: 640, height: 480, fps: 30}
   }" \
   --teleop.type=widowxai_leader \
   --teleop.ip_address=192.168.1.2 \
-  --teleop.id=bimanual_leader \
+  --teleop.id=leader \
   --display_data=true \
   --dataset.push_to_hub=false \
   --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
@@ -68,15 +67,15 @@ Record 25 episodes of a bimanual handover task with two WidowX AI robots using t
 Datasets are pushed to the Hugging Face Hub after recording by default - make sure to set the `HF_USER` environment variable and be logged in with the `huggingface-cli login` command before running this script.
 
 ```shell
-uv run -m trossen_lerobot.record \
-  --robot.type=bi_widowxai_follower \
+uv run lerobot-record \
+  --robot.type=bi_widowxai_follower_robot \
   --robot.left_arm_ip_address=192.168.1.5 \
   --robot.right_arm_ip_address=192.168.1.4 \
   --robot.id=bimanual_follower \
   --robot.cameras='{
     cam_low: {"type": "opencv", "index_or_path": "0", "width": 640, "height": 480, "fps": 30},
   }' \
-  --teleop.type=bi_widowxai_leader \
+  --teleop.type=bi_widowxai_leader_teleop \
   --teleop.left_arm_ip_address=192.168.1.3 \
   --teleop.right_arm_ip_address=192.168.1.2 \
   --teleop.id=bimanual_leader \
@@ -86,7 +85,7 @@ uv run -m trossen_lerobot.record \
   --dataset.single_task="Grab and handover the red cube to the other arm"
 ```
 
-## Dataset Visualization
+### Dataset Visualization
 
 If you uploaded your dataset to the Hugging Face Hub using ``--control.push_to_hub=true``, you can [visualize your dataset online](https://huggingface.co/spaces/lerobot/visualize_dataset).
 To do so, copy and paste your repository ID into the provided field.
@@ -101,11 +100,11 @@ Your repository ID follows the format:
 Evaluate a trained policy by recording 2 episodes of a cube pickup task with a single WidowX AI robot using the OpenCV camera interface.
 
 ```shell
-uv run -m trossen_lerobot.record \
-  --robot.type=widowxai_follower \
+uv run lerobot-record \
+  --robot.type=widowxai_follower_robot \
   --robot.ip_address=192.168.1.4 \
   --robot.cameras="{cam_high: {type: opencv, index_or_path: 0, width: 640, height: 480}}" \
-  --robot.id=bimanual_follower \
+  --robot.id=follower \
   --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
   --dataset.num_episodes=2 \
   --dataset.single_task="Grab the cube" \
@@ -117,8 +116,8 @@ uv run -m trossen_lerobot.record \
 Replay episode 2 of a cube pickup task with a single WidowX AI robot.
 
 ```shell
-uv run -m trossen_lerobot.replay \
-    --robot.type=widowxai_follower \
+uv run lerobot-replay \
+    --robot.type=widowxai_follower_robot \
     --robot.ip_address=192.168.1.4 \
     --robot.id=follower \
     --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
