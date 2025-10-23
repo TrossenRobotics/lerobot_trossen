@@ -34,7 +34,7 @@ Teleoperate a WidowX AI robot with another WidowX AI robot.
 
 ```shell
 uv run lerobot-teleoperate \
-    --robot.type=widowxai_follower_robot_robot \
+    --robot.type=widowxai_follower_robot \
     --robot.ip_address=192.168.1.4 \
     --robot.id=follower \
     --teleop.type=widowxai_leader_teleop \
@@ -56,7 +56,7 @@ uv run lerobot-record \
   --robot.cameras="{
     wrist: {type: intelrealsense, serial_number_or_name: "0123456789", width: 640, height: 480, fps: 30}
   }" \
-  --teleop.type=widowxai_leader \
+  --teleop.type=widowxai_leader_teleop \
   --teleop.ip_address=192.168.1.2 \
   --teleop.id=leader \
   --display_data=true \
