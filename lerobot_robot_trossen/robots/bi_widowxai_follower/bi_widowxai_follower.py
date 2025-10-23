@@ -6,8 +6,8 @@ from typing import Any
 from lerobot.cameras.utils import make_cameras_from_configs
 from lerobot.robots.robot import Robot
 
-from trossen_lerobot.robots.widowxai_follower import WidowXAIFollower
-from trossen_lerobot.robots.widowxai_follower.config_widowxai_follower import (
+from lerobot_robot_trossen.robots.widowxai_follower import WidowXAIFollower
+from lerobot_robot_trossen.robots.widowxai_follower.config_widowxai_follower import (
     WidowXAIFollowerConfig,
 )
 

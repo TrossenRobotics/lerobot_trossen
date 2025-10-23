@@ -5,10 +5,12 @@ from functools import cached_property
 
 from lerobot.teleoperators.teleoperator import Teleoperator
 
-from trossen_lerobot.teleoperators.widowxai_leader.config_widowxai_leader import (
+from lerobot_robot_trossen.teleoperators.widowxai_leader.config_widowxai_leader import (
     WidowXAILeaderTeleopConfig,
 )
-from trossen_lerobot.teleoperators.widowxai_leader.widowxai_leader import WidowXAILeaderTeleop
+from lerobot_robot_trossen.teleoperators.widowxai_leader.widowxai_leader import (
+    WidowXAILeaderTeleop,
+)
 
 from .config_bi_widowxai_leader import BiWidowXAILeaderRobotConfig
 

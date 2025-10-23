@@ -36,8 +36,8 @@ from lerobot.replay import ReplayConfig
 from lerobot.utils.robot_utils import busy_wait
 from lerobot.utils.utils import init_logging, log_say
 
-from trossen_lerobot.robots import bi_widowxai_follower, widowxai_follower  # noqa: F401
-from trossen_lerobot.robots.utils import make_robot_from_config
+from lerobot_robot_trossen.robots import bi_widowxai_follower, widowxai_follower  # noqa: F401
+from lerobot_robot_trossen.robots.utils import make_robot_from_config
 
 
 @draccus.wrap()

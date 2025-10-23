@@ -1,7 +1,7 @@
 [project]
-name = "trossen_lerobot"
+name = "lerobot_robot_trossen"
 version = "0.1.0"
-description = "Trossen Robotics LeRobot integration."
+description = "Trossen Robotics LeRobot robot integration."
 authors = [
     { name = "Trossen Robotics" }
 ]

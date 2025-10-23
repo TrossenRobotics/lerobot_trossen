@@ -66,10 +66,10 @@ from lerobot.utils.control_utils import (
 from lerobot.utils.utils import init_logging, log_say
 from lerobot.utils.visualization_utils import _init_rerun
 
-from trossen_lerobot.robots import bi_widowxai_follower, widowxai_follower  # noqa: F401
-from trossen_lerobot.robots.utils import make_robot_from_config
-from trossen_lerobot.teleoperators import bi_widowxai_leader, widowxai_leader  # noqa: F401
-from trossen_lerobot.teleoperators.utils import make_teleoperator_from_config
+from lerobot_robot_trossen.robots import bi_widowxai_follower, widowxai_follower  # noqa: F401
+from lerobot_robot_trossen.robots.utils import make_robot_from_config
+from lerobot_robot_trossen.teleoperators import bi_widowxai_leader, widowxai_leader  # noqa: F401
+from lerobot_robot_trossen.teleoperators.utils import make_teleoperator_from_config
 
 
 @parser.wrap()
