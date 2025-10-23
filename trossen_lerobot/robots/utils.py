@@ -11,8 +11,8 @@ def make_robot_from_config(config: RobotConfig) -> Robot:
 
             return WidowXAIFollower(config)
         elif config.type == "bi_widowxai_follower":
-            from .bi_widowxai_follower import BiWidowXAIFollower
+            from .bi_widowxai_follower import BiWidowXAIFollowerRobot
 
-            return BiWidowXAIFollower(config)
+            return BiWidowXAIFollowerRobot(config)
         else:
             raise ValueError(config.type) from None

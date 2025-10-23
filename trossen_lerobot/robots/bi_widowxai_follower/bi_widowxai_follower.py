@@ -11,21 +11,21 @@ from trossen_lerobot.robots.widowxai_follower.config_widowxai_follower import (
     WidowXAIFollowerConfig,
 )
 
-from .config_bi_widowxai_follower import BiWidowXAIFollowerConfig
+from .config_bi_widowxai_follower import BiWidowXAIFollowerRobotConfig
 
 logger = logging.getLogger(__name__)
 
 
-class BiWidowXAIFollower(Robot):
+class BiWidowXAIFollowerRobot(Robot):
     """
     [Bimanual WidowX AI Follower Arms](https://www.trossenrobotics.com/widowx-ai) by Trossen
     Robotics
     """
 
-    config_class = BiWidowXAIFollowerConfig
+    config_class = BiWidowXAIFollowerRobotConfig
     name = "bi_widowxai_follower"
 
-    def __init__(self, config: BiWidowXAIFollowerConfig):
+    def __init__(self, config: BiWidowXAIFollowerRobotConfig):
         super().__init__(config)
         self.config = config
 

@@ -8,7 +8,7 @@ from lerobot.teleoperators.config import TeleoperatorConfig
 
 @TeleoperatorConfig.register_subclass("widowxai_leader")
 @dataclass
-class WidowXAILeaderConfig(TeleoperatorConfig):
+class WidowXAILeaderTeleopConfig(TeleoperatorConfig):
     # IP address of the arm
     ip_address: str
 

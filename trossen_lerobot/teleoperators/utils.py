@@ -13,12 +13,12 @@ def make_teleoperator_from_config(config: TeleoperatorConfig) -> Teleoperator:
     except ValueError:
         logger.info("Custom teleoperator type detected, creating specific teleoperator.")
         if config.type == "widowxai_leader":
-            from .widowxai_leader import WidowXAILeader
+            from .widowxai_leader import WidowXAILeaderTeleop
 
-            return WidowXAILeader(config)
+            return WidowXAILeaderTeleop(config)
         elif config.type == "bi_widowxai_leader":
-            from .bi_widowxai_leader import BiWidowXAILeader
+            from .bi_widowxai_leader import BiWidowXAILeaderRobot
 
-            return BiWidowXAILeader(config)
+            return BiWidowXAILeaderRobot(config)
         else:
             raise ValueError(config.type) from None

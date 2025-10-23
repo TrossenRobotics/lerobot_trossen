@@ -1,2 +1,2 @@
-from .config_widowxai_leader import WidowXAILeaderConfig
-from .widowxai_leader import WidowXAILeader
+from .config_widowxai_leader import WidowXAILeaderTeleopConfig
+from .widowxai_leader import WidowXAILeaderTeleop

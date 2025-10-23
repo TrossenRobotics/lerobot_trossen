@@ -6,39 +6,39 @@ from functools import cached_property
 from lerobot.teleoperators.teleoperator import Teleoperator
 
 from trossen_lerobot.teleoperators.widowxai_leader.config_widowxai_leader import (
-    WidowXAILeaderConfig,
+    WidowXAILeaderTeleopConfig,
 )
-from trossen_lerobot.teleoperators.widowxai_leader.widowxai_leader import WidowXAILeader
+from trossen_lerobot.teleoperators.widowxai_leader.widowxai_leader import WidowXAILeaderTeleop
 
-from .config_bi_widowxai_leader import BiWidowXAILeaderConfig
+from .config_bi_widowxai_leader import BiWidowXAILeaderRobotConfig
 
 logger = logging.getLogger(__name__)
 
 
-class BiWidowXAILeader(Teleoperator):
+class BiWidowXAILeaderRobot(Teleoperator):
     """
     [Bimanual WidowX AI Leader Arms](https://www.trossenrobotics.com/widowx-ai) by Trossen Robotics
     """
 
-    config_class = BiWidowXAILeaderConfig
+    config_class = BiWidowXAILeaderRobotConfig
     name = "bi_widowxai_leader"
 
-    def __init__(self, config: BiWidowXAILeaderConfig):
+    def __init__(self, config: BiWidowXAILeaderRobotConfig):
         super().__init__(config)
         self.config = config
 
-        left_arm_config = WidowXAILeaderConfig(
+        left_arm_config = WidowXAILeaderTeleopConfig(
             id=f"{config.id}_left" if config.id else None,
             ip_address=config.left_arm_ip_address,
         )
 
-        right_arm_config = WidowXAILeaderConfig(
+        right_arm_config = WidowXAILeaderTeleopConfig(
             id=f"{config.id}_right" if config.id else None,
             ip_address=config.right_arm_ip_address,
         )
 
-        self.left_arm = WidowXAILeader(left_arm_config)
-        self.right_arm = WidowXAILeader(right_arm_config)
+        self.left_arm = WidowXAILeaderTeleop(left_arm_config)
+        self.right_arm = WidowXAILeaderTeleop(right_arm_config)
 
     @cached_property
     def action_features(self) -> dict[str, type]:
