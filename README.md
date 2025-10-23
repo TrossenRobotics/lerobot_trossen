@@ -13,6 +13,9 @@ Follow the instructions [here](https://docs.astral.sh/uv/getting-started/install
 Run the following command to install this package and its dependencies:
 
 ```shell
+# Clone this repository
+git clone https://github.com/TrossenRobotics/lerobot_trossen.git
+
 # Install the trossen lerobot packages and their dependencies
 uv sync
 
