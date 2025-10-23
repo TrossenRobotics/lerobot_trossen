@@ -6,12 +6,11 @@ from typing import Any
 from lerobot.cameras.utils import make_cameras_from_configs
 from lerobot.robots.robot import Robot
 
-from lerobot_robot_trossen.robots.widowxai_follower import WidowXAIFollower
-from lerobot_robot_trossen.robots.widowxai_follower.config_widowxai_follower import (
-    WidowXAIFollowerConfig,
+from lerobot_robot_trossen.config_bi_widowxai_follower import (
+    BiWidowXAIFollowerRobotConfig,
 )
-
-from .config_bi_widowxai_follower import BiWidowXAIFollowerRobotConfig
+from lerobot_robot_trossen.config_widowxai_follower import WidowXAIFollowerConfig
+from lerobot_robot_trossen.widowxai_follower import WidowXAIFollower
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +22,7 @@ class BiWidowXAIFollowerRobot(Robot):
     """
 
     config_class = BiWidowXAIFollowerRobotConfig
-    name = "bi_widowxai_follower"
+    name = "bi_widowxai_follower_robot"
 
     def __init__(self, config: BiWidowXAIFollowerRobotConfig):
         super().__init__(config)
@@ -55,8 +54,12 @@ class BiWidowXAIFollowerRobot(Robot):
     @property
     def _joint_ft(self) -> dict[str, type]:
         return {
-            f"left_{joint_name}.pos": float for joint_name in self.left_arm.config.joint_names
-        } | {f"right_{joint_name}.pos": float for joint_name in self.right_arm.config.joint_names}
+            f"left_{joint_name}.pos": float
+            for joint_name in self.left_arm.config.joint_names
+        } | {
+            f"right_{joint_name}.pos": float
+            for joint_name in self.right_arm.config.joint_names
+        }
 
     @property
     def _cameras_ft(self) -> dict[str, tuple]:

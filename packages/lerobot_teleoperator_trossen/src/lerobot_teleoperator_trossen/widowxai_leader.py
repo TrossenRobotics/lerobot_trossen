@@ -1,13 +1,13 @@
-#!/usr/bin/env python
-
 import logging
 import time
 
 import trossen_arm
-from lerobot.errors import DeviceAlreadyConnectedError, DeviceNotConnectedError
+from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnectedError
 from lerobot.teleoperators.teleoperator import Teleoperator
 
-from .config_widowxai_leader import WidowXAILeaderTeleopConfig
+from lerobot_teleoperator_trossen.config_widowxai_leader import (
+    WidowXAILeaderTeleopConfig,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +18,7 @@ class WidowXAILeaderTeleop(Teleoperator):
     """
 
     config_class = WidowXAILeaderTeleopConfig
-    name = "widowxai_leader"
+    name = "widowxai_leader_teleop"
 
     def __init__(self, config: WidowXAILeaderTeleopConfig):
         super().__init__(config)

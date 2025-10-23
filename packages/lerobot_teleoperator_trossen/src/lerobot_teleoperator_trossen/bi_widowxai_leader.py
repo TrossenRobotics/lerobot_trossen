@@ -1,18 +1,15 @@
-#!/usr/bin/env python
-
 import logging
 from functools import cached_property
 
 from lerobot.teleoperators.teleoperator import Teleoperator
 
-from lerobot_robot_trossen.teleoperators.widowxai_leader.config_widowxai_leader import (
+from lerobot_teleoperator_trossen.config_bi_widowxai_leader import (
+    BiWidowXAILeaderRobotConfig,
+)
+from lerobot_teleoperator_trossen.config_widowxai_leader import (
     WidowXAILeaderTeleopConfig,
 )
-from lerobot_robot_trossen.teleoperators.widowxai_leader.widowxai_leader import (
-    WidowXAILeaderTeleop,
-)
-
-from .config_bi_widowxai_leader import BiWidowXAILeaderRobotConfig
+from lerobot_teleoperator_trossen.widowxai_leader import WidowXAILeaderTeleop
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +20,7 @@ class BiWidowXAILeaderRobot(Teleoperator):
     """
 
     config_class = BiWidowXAILeaderRobotConfig
-    name = "bi_widowxai_leader"
+    name = "bi_widowxai_leader_teleop"
 
     def __init__(self, config: BiWidowXAILeaderRobotConfig):
         super().__init__(config)
@@ -45,8 +42,12 @@ class BiWidowXAILeaderRobot(Teleoperator):
     @cached_property
     def action_features(self) -> dict[str, type]:
         return {
-            f"left_{joint_name}.pos": float for joint_name in self.left_arm.config.joint_names
-        } | {f"right_{joint_name}.pos": float for joint_name in self.right_arm.config.joint_names}
+            f"left_{joint_name}.pos": float
+            for joint_name in self.left_arm.config.joint_names
+        } | {
+            f"right_{joint_name}.pos": float
+            for joint_name in self.right_arm.config.joint_names
+        }
 
     @cached_property
     def feedback_features(self) -> dict[str, type]:

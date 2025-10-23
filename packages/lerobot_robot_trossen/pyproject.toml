@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lerobot-robot-trossen"
+version = "0.1.0"
+description = "Trossen Robotics LeRobot integration - Robots"
+authors = [{ name = "Trossen Robotics" }]
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+  # "lerobot[intelrealsense]>=0.3.2",
+  "lerobot[intelrealsense]@git+https://github.com/huggingface/lerobot.git@306429a85b9cc79d8a86278d8b5bc024182c3cde",
+  "trossen_arm>=1.9.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["lerobot_robot_trossen"]

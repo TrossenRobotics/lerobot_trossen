@@ -4,7 +4,7 @@ from lerobot.cameras import CameraConfig
 from lerobot.robots.config import RobotConfig
 
 
-@RobotConfig.register_subclass("bi_widowxai_follower")
+@RobotConfig.register_subclass("bi_widowxai_follower_robot")
 @dataclass
 class BiWidowXAIFollowerRobotConfig(RobotConfig):
     # IP address of the arms
