@@ -34,13 +34,13 @@ Teleoperate a WidowX AI robot with another WidowX AI robot.
 
 ```shell
 uv run lerobot-teleoperate \
-    --robot.type=widowxai_follower_robot \
-    --robot.ip_address=192.168.1.4 \
-    --robot.id=follower \
-    --teleop.type=widowxai_leader_teleop \
-    --teleop.ip_address=192.168.1.2 \
-    --teleop.id=leader \
-    --display_data=false
+  --robot.type=widowxai_follower_robot \
+  --robot.ip_address=192.168.1.4 \
+  --robot.id=follower \
+  --teleop.type=widowxai_leader_teleop \
+  --teleop.ip_address=192.168.1.2 \
+  --teleop.id=leader \
+  --display_data=false
 ```
 
 ### Record Script
@@ -120,9 +120,9 @@ Replay episode 2 of a cube pickup task with a single WidowX AI robot.
 
 ```shell
 uv run lerobot-replay \
-    --robot.type=widowxai_follower_robot \
-    --robot.ip_address=192.168.1.4 \
-    --robot.id=follower \
-    --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
-    --dataset.episode=2
+  --robot.type=widowxai_follower_robot \
+  --robot.ip_address=192.168.1.4 \
+  --robot.id=follower \
+  --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
+  --dataset.episode=2
 ```
