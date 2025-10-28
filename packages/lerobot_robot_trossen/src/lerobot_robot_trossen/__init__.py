@@ -2,3 +2,5 @@ from .bi_widowxai_follower import BiWidowXAIFollowerRobot
 from .config_bi_widowxai_follower import BiWidowXAIFollowerRobotConfig
 from .config_widowxai_follower import WidowXAIFollowerConfig
 from .widowxai_follower import WidowXAIFollower
+from .config_mobileai import MobileAIConfig
+from .mobileai import MobileAI
