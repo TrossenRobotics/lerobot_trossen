@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lerobot-teleoperator-trossen"
+version = "0.1.0"
+description = "Trossen Robotics LeRobot integration - Teleoperators"
+authors = [{ name = "Trossen Robotics" }]
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+  "lerobot[intelrealsense]>=0.4.0",
+  "trossen_arm>=1.9.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["lerobot_teleoperator_trossen"]

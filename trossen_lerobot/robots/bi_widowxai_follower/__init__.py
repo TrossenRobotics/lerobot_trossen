@@ -1,2 +1,0 @@
-from .bi_widowxai_follower import BiWidowXAIFollower
-from .config_bi_widowxai_follower import BiWidowXAIFollowerConfig

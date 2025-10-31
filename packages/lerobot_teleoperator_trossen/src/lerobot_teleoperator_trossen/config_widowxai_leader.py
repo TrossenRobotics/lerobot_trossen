@@ -1,14 +1,12 @@
-#!/usr/bin/env python
-
 from dataclasses import dataclass, field
 
 import numpy as np
 from lerobot.teleoperators.config import TeleoperatorConfig
 
 
-@TeleoperatorConfig.register_subclass("widowxai_leader")
+@TeleoperatorConfig.register_subclass("widowxai_leader_teleop")
 @dataclass
-class WidowXAILeaderConfig(TeleoperatorConfig):
+class WidowXAILeaderTeleopConfig(TeleoperatorConfig):
     # IP address of the arm
     ip_address: str
 

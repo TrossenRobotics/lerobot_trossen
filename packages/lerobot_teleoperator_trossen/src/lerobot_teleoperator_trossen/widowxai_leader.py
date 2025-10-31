@@ -1,26 +1,26 @@
-#!/usr/bin/env python
-
 import logging
 import time
 
 import trossen_arm
-from lerobot.errors import DeviceAlreadyConnectedError, DeviceNotConnectedError
+from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnectedError
 from lerobot.teleoperators.teleoperator import Teleoperator
 
-from .config_widowxai_leader import WidowXAILeaderConfig
+from lerobot_teleoperator_trossen.config_widowxai_leader import (
+    WidowXAILeaderTeleopConfig,
+)
 
 logger = logging.getLogger(__name__)
 
 
-class WidowXAILeader(Teleoperator):
+class WidowXAILeaderTeleop(Teleoperator):
     """
     [WidowX AI](https://www.trossenrobotics.com/widowx-ai) by Trossen Robotics
     """
 
-    config_class = WidowXAILeaderConfig
-    name = "widowxai_leader"
+    config_class = WidowXAILeaderTeleopConfig
+    name = "widowxai_leader_teleop"
 
-    def __init__(self, config: WidowXAILeaderConfig):
+    def __init__(self, config: WidowXAILeaderTeleopConfig):
         super().__init__(config)
         self.config = config
         self.driver = trossen_arm.TrossenArmDriver()
