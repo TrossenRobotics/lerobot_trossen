@@ -2,7 +2,7 @@
 name = "lerobot-trossen"
 version = "0.1.0"
 description = "Trossen Robotics LeRobot integration"
-requires-python = ">=3.10,<3.13"
+requires-python = ">=3.10"
 
 dependencies = [
   "lerobot-robot-trossen>=0.1.0",
