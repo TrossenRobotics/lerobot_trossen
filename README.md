@@ -45,7 +45,7 @@ uv run lerobot-teleoperate \
 
 ### Record Script
 
-Record 10 episodes of a cube pickup task with a single WidowX AI robot using the RealSense camera interface.
+Record 10 episodes with duration 45s of a cube pickup task with a single WidowX AI robot using the RealSense camera interface.
 This dataset will not be pushed to the Hugging Face Hub after recording.
 
 ```shell
@@ -62,11 +62,13 @@ uv run lerobot-record \
   --display_data=true \
   --dataset.push_to_hub=false \
   --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
+  --dataset.episode_time_s=45 \
+  --dataset.reset_time_s=15 \
   --dataset.num_episodes=10 \
   --dataset.single_task="Grab the cube"
 ```
 
-Record 25 episodes of a bimanual handover task with two WidowX AI robots using the OpenCV camera interface.
+Record 25 episodes with duration 60s of a bimanual handover task with two WidowX AI robots using the OpenCV camera interface.
 Datasets are pushed to the Hugging Face Hub after recording by default - make sure to set the `HF_USER` environment variable and be logged in with the `huggingface-cli login` command before running this script.
 
 ```shell
@@ -85,6 +87,8 @@ uv run lerobot-record \
   --display_data=true \
   --dataset.repo_id=${HF_USER}/bimanual-widowxai-handover-cube \
   --dataset.num_episodes=25 \
+  --dataset.episode_time_s=60 \
+  --dataset.reset_time_s=15 \
   --dataset.single_task="Grab and handover the red cube to the other arm"
 ```
 
