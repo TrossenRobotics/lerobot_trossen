@@ -91,6 +91,13 @@ class MobileAIRobot(Robot):
         # Set the arm to position control mode
         self.arms.configure()
 
+        # Disable the base motor torque
+        torque_disable_success, message = self.base.enable_motor_torque(False)
+        if not torque_disable_success:
+            raise ConnectionError(
+                f"Failed to disable Mobile AI base motor torque: {message}"
+            )
+
     def get_observation(self) -> dict[str, Any]:
         obs_dict = {}
 
