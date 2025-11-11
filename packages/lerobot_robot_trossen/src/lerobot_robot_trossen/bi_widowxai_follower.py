@@ -69,11 +69,11 @@ class BiWidowXAIFollowerRobot(Robot):
         }
 
     @cached_property
-    def observation_features(self) -> dict[str, type | tuple]:
+    def observation_features(self) -> dict[str, type | tuple]:  # type: ignore[override]
         return {**self._joint_ft, **self._cameras_ft}
 
     @cached_property
-    def action_features(self) -> dict[str, type]:
+    def action_features(self) -> dict[str, type]:  # type: ignore[override]
         return self._joint_ft
 
     @property
