@@ -20,7 +20,7 @@ class MobileAIRobot(Robot):
     """
 
     config_class = MobileAIRobotConfig
-    name = "bi_widowxai_follower"
+    name = "mobileai_robot"
 
     def __init__(self, config: MobileAIRobotConfig):
         super().__init__(config)
