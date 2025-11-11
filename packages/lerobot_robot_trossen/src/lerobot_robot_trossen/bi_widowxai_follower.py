@@ -9,7 +9,7 @@ from lerobot.robots.robot import Robot
 from lerobot_robot_trossen.config_bi_widowxai_follower import (
     BiWidowXAIFollowerRobotConfig,
 )
-from lerobot_robot_trossen.config_widowxai_follower import WidowXAIFollowerConfig
+from lerobot_robot_trossen.config_widowxai_follower import WidowXAIFollowerRobotConfig
 from lerobot_robot_trossen.widowxai_follower import WidowXAIFollower
 
 logger = logging.getLogger(__name__)
@@ -28,7 +28,7 @@ class BiWidowXAIFollowerRobot(Robot):
         super().__init__(config)
         self.config = config
 
-        left_arm_config = WidowXAIFollowerConfig(
+        left_arm_config = WidowXAIFollowerRobotConfig(
             id=f"{config.id}_left" if config.id else None,
             ip_address=config.left_arm_ip_address,
             max_relative_target=config.left_arm_max_relative_target,
@@ -37,7 +37,7 @@ class BiWidowXAIFollowerRobot(Robot):
             cameras={},
         )
 
-        right_arm_config = WidowXAIFollowerConfig(
+        right_arm_config = WidowXAIFollowerRobotConfig(
             id=f"{config.id}_right" if config.id else None,
             ip_address=config.right_arm_ip_address,
             max_relative_target=config.right_arm_max_relative_target,

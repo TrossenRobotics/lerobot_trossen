@@ -7,7 +7,7 @@ from lerobot.robots.config import RobotConfig
 
 @RobotConfig.register_subclass("widowxai_follower_robot")
 @dataclass
-class WidowXAIFollowerConfig(RobotConfig):
+class WidowXAIFollowerRobotConfig(RobotConfig):
     # IP address of the arm
     ip_address: str
 
