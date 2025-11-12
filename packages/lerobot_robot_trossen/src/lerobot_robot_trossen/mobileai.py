@@ -42,7 +42,7 @@ class MobileAIRobot(Robot):
         self.cameras = make_cameras_from_configs(config.cameras)
 
     @property
-    def _joint_ft(self) -> dict[str, type]:
+    def _state_ft(self) -> dict[str, type]:
         arms_ft = self.arms._joint_ft
         base_ft = {"x.vel": float, "theta.vel": float}
         return {**arms_ft, **base_ft}
@@ -56,11 +56,11 @@ class MobileAIRobot(Robot):
 
     @cached_property
     def observation_features(self) -> dict[str, type | tuple]:  # type: ignore[override]
-        return {**self._joint_ft, **self._cameras_ft}
+        return {**self._state_ft, **self._cameras_ft}
 
     @cached_property
     def action_features(self) -> dict[str, type]:  # type: ignore[override]
-        return self._joint_ft
+        return self._state_ft
 
     @property
     def is_connected(self) -> bool:
@@ -76,6 +76,8 @@ class MobileAIRobot(Robot):
 
         for cam in self.cameras.values():
             cam.connect()
+
+        self.configure()
 
     @property
     def is_calibrated(self) -> bool:

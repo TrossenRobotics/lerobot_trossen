@@ -1,4 +1,6 @@
 from .bi_widowxai_follower import BiWidowXAIFollowerRobot
 from .config_bi_widowxai_follower import BiWidowXAIFollowerRobotConfig
+from .config_mobileai import MobileAIRobotConfig
 from .config_widowxai_follower import WidowXAIFollowerRobotConfig
+from .mobileai import MobileAIRobot
 from .widowxai_follower import WidowXAIFollower
