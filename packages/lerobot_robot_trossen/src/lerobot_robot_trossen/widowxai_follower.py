@@ -9,7 +9,7 @@ from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnected
 from lerobot.robots.robot import Robot
 from lerobot.robots.utils import ensure_safe_goal_position
 
-from lerobot_robot_trossen.config_widowxai_follower import WidowXAIFollowerConfig
+from lerobot_robot_trossen.config_widowxai_follower import WidowXAIFollowerRobotConfig
 
 logger = logging.getLogger(__name__)
 
@@ -19,10 +19,10 @@ class WidowXAIFollower(Robot):
     [WidowX AI](https://www.trossenrobotics.com/widowx-ai) by Trossen Robotics
     """
 
-    config_class = WidowXAIFollowerConfig
+    config_class = WidowXAIFollowerRobotConfig
     name = "widowxai_follower_robot"
 
-    def __init__(self, config: WidowXAIFollowerConfig):
+    def __init__(self, config: WidowXAIFollowerRobotConfig):
         super().__init__(config)
         self.config = config
 
@@ -44,11 +44,11 @@ class WidowXAIFollower(Robot):
         }
 
     @cached_property
-    def observation_features(self) -> dict[str, type | tuple]:
+    def observation_features(self) -> dict[str, type | tuple]:  # type: ignore[override]
         return {**self._joint_ft, **self._cameras_ft}
 
     @cached_property
-    def action_features(self) -> dict[str, type]:
+    def action_features(self) -> dict[str, type]:  # type: ignore[override]
         return self._joint_ft
 
     @property

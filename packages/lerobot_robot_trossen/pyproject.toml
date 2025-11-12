@@ -11,6 +11,7 @@ readme = "README.md"
 requires-python = ">=3.10,<3.13"
 dependencies = [
   "lerobot[intelrealsense]>=0.4.0",
+  "trossen-slate>=0.0.3",
   "trossen_arm>=1.9.0",
 ]
 
