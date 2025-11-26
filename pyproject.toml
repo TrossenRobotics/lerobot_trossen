@@ -7,6 +7,7 @@ requires-python = ">=3.10"
 dependencies = [
   "lerobot-robot-trossen>=0.1.0",
   "lerobot-teleoperator-trossen>=0.1.0",
+  "trossen-slate>=0.0.3",
 ]
 
 [tool.uv.sources]
