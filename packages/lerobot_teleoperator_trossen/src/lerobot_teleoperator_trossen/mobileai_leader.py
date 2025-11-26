@@ -5,7 +5,7 @@ from lerobot_teleoperator_trossen.config_mobileai_leader import (
     MobileAILeaderTeleopConfig,
 )
 from lerobot_teleoperator_trossen.bi_widowxai_leader import BiWidowXAILeaderRobot
-from lerobot_robot_trossen.mobileai import LATEST_BASE_VELOCITY
+from lerobot_robot_trossen.mobileai import get_latest_base_velocity
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +30,5 @@ class MobileAILeaderTeleop(BiWidowXAILeaderRobot):
 
     def get_action(self) -> dict[str, float]:
         action = super().get_action()
-        action["x.vel"] = LATEST_BASE_VELOCITY["x.vel"]
-        action["theta.vel"] = LATEST_BASE_VELOCITY["theta.vel"]
+        action.update(get_latest_base_velocity())
         return action

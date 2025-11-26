@@ -12,4 +12,4 @@ from lerobot.robots.config import RobotConfig
 class MobileAIRobotConfig(BiWidowXAIFollowerRobotConfig):
     # Mobile AI uses the same configuration as BiWidowXAIFollowerRobotConfig.
     # The base of the kit does not require any configuration parameters.
-    enable_motor_torque: bool = False
+    enable_base_motor_torque: bool = False

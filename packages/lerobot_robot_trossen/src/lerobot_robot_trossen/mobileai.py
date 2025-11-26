@@ -1,4 +1,5 @@
 import logging
+import threading
 import time
 from functools import cached_property
 from typing import Any
@@ -15,7 +16,13 @@ logger = logging.getLogger(__name__)
 
 # Shared state to allow teleoperator to access the latest base velocity from the robot
 # This is used for passive recording of base movement
-LATEST_BASE_VELOCITY = {"x.vel": 0.0, "theta.vel": 0.0}
+_base_velocity_lock = threading.Lock()
+_latest_base_velocity = {"x.vel": 0.0, "theta.vel": 0.0}
+
+
+def get_latest_base_velocity() -> dict[str, float]:
+    with _base_velocity_lock:
+        return _latest_base_velocity.copy()
 
 
 class MobileAIRobot(Robot):
@@ -78,7 +85,7 @@ class MobileAIRobot(Robot):
         if not base_init_success:
             raise ConnectionError(f"Failed to connect to Mobile AI base: {message}")
 
-        self.base.enable_motor_torque(self.config.enable_motor_torque)
+        self.base.enable_motor_torque(self.config.enable_base_motor_torque)
 
         for cam in self.cameras.values():
             cam.connect()
@@ -109,8 +116,9 @@ class MobileAIRobot(Robot):
         obs_dict.update({"x.vel": base_obs[0], "theta.vel": base_obs[1]})
 
         # Update shared state
-        LATEST_BASE_VELOCITY["x.vel"] = base_obs[0]
-        LATEST_BASE_VELOCITY["theta.vel"] = base_obs[1]
+        with _base_velocity_lock:
+            _latest_base_velocity["x.vel"] = base_obs[0]
+            _latest_base_velocity["theta.vel"] = base_obs[1]
 
         # Capture images from cameras
         for cam_key, cam in self.cameras.items():
