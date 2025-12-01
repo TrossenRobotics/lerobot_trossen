@@ -144,8 +144,15 @@ class MobileAIRobot(Robot):
         }
 
     def disconnect(self):
-        self.arms.disconnect()
-        self.base.set_cmd_vel(0.0, 0.0)
+        if not self.base.set_cmd_vel(0.0, 0.0):
+            # We log a warning but continue with disconnect
+            logger.warning("Failed to stop Mobile AI base during disconnect.")
+
+        try:
+            self.arms.disconnect()
+        except Exception as e:
+            # We log a warning but continue with disconnect
+            logger.warning(f"Error while disconnecting arms: {e}")
 
         for cam in self.cameras.values():
             cam.disconnect()
