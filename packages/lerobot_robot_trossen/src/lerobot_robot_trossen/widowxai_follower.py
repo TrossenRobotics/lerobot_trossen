@@ -1,6 +1,5 @@
 import logging
 import time
-from functools import cached_property
 from typing import Any
 
 import trossen_arm
@@ -37,17 +36,36 @@ class WidowXAIFollower(Robot):
         return {f"{joint_name}.pos": float for joint_name in self.config.joint_names}
 
     @property
+    def _joint_vel_ft(self) -> dict[str, type]:
+        return {f"{joint_name}.vel": float for joint_name in self.config.joint_names}
+
+    @property
+    def _joint_eff_ft(self) -> dict[str, type]:
+        return {f"{joint_name}.eff": float for joint_name in self.config.joint_names}
+
+    @property
+    def _joint_ext_eff_ft(self) -> dict[str, type]:
+        return {f"{joint_name}.ext_eff": float for joint_name in self.config.joint_names}
+
+    @property
     def _cameras_ft(self) -> dict[str, tuple]:
         return {
             cam: (self.config.cameras[cam].height, self.config.cameras[cam].width, 3)
             for cam in self.cameras
         }
 
-    @cached_property
+    @property
     def observation_features(self) -> dict[str, type | tuple]:
-        return {**self._joint_ft, **self._cameras_ft}
+        joint_ft = {**self._joint_ft}
+        if self.config.include_velocity:
+            joint_ft.update(self._joint_vel_ft)
+        if self.config.include_effort:
+            joint_ft.update(self._joint_eff_ft)
+        if self.config.include_external_effort:
+            joint_ft.update(self._joint_ext_eff_ft)
+        return {**joint_ft, **self._cameras_ft}
 
-    @cached_property
+    @property
     def action_features(self) -> dict[str, type]:
         return self._joint_ft
 
@@ -113,26 +131,39 @@ class WidowXAIFollower(Robot):
                 )
             }
         )
-        obs_dict.update(
-            {
-                f"{joint_name}.vel": vel
-                for joint_name, vel in zip(
-                    self.config.joint_names,
-                    robot_all_joint_outputs.velocities,
-                    strict=True,
-                )
-            }
-        )
-        obs_dict.update(
-            {
-                f"{joint_name}.eff": eff
-                for joint_name, eff in zip(
-                    self.config.joint_names,
-                    robot_all_joint_outputs.efforts,
-                    strict=True,
-                )
-            }
-        )
+        if self.config.include_velocity:
+            obs_dict.update(
+                {
+                    f"{joint_name}.vel": vel
+                    for joint_name, vel in zip(
+                        self.config.joint_names,
+                        robot_all_joint_outputs.velocities,
+                        strict=True,
+                    )
+                }
+            )
+        if self.config.include_effort:
+            obs_dict.update(
+                {
+                    f"{joint_name}.eff": eff
+                    for joint_name, eff in zip(
+                        self.config.joint_names,
+                        robot_all_joint_outputs.efforts,
+                        strict=True,
+                    )
+                }
+            )
+        if self.config.include_external_effort:
+            obs_dict.update(
+                {
+                    f"{joint_name}.ext_eff": ext_eff
+                    for joint_name, ext_eff in zip(
+                        self.config.joint_names,
+                        robot_all_joint_outputs.external_efforts,
+                        strict=True,
+                    )
+                }
+            )
 
         dt_ms = (time.perf_counter() - start) * 1e3
         logger.debug(f"{self} read state: {dt_ms:.1f}ms")
