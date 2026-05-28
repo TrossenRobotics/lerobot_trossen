@@ -118,7 +118,8 @@ class WidowXAIFollower(Robot):
         if not self.is_connected:
             raise DeviceNotConnectedError(f"{self} is not connected.")
 
-        # Create observation dictionary with joint positions, velocities, and efforts
+        # Create observation dictionary with joint positions, plus velocities and efforts when
+        # enabled via include_velocity / include_effort / include_external_effort.
         start = time.perf_counter()
 
         robot_all_joint_outputs = self.driver.get_robot_output().joint.all
