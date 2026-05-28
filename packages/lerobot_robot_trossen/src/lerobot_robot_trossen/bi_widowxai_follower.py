@@ -79,9 +79,7 @@ class BiWidowXAIFollowerRobot(Robot):
     def action_features(self) -> dict[str, type]:
         return {
             f"left_{key}": ft for key, ft in self.left_arm.action_features.items()
-        } | {
-            f"right_{key}": ft for key, ft in self.right_arm.action_features.items()
-        }
+        } | {f"right_{key}": ft for key, ft in self.right_arm.action_features.items()}
 
     @property
     def is_connected(self) -> bool:
