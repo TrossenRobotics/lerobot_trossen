@@ -26,6 +26,20 @@ class WidowXAIFollowerConfig(RobotConfig):
     # Control loop rate in Hz
     loop_rate: int = 30
 
+    # Include per-joint velocity (`.vel`) in observations.
+    include_velocity: bool = False
+
+    # Include per-joint effort (`.eff`) in observations. This is the total motor effort, combining
+    # gravity, friction, and any external load. Measured in Nm for the arm joints and N for the
+    # gripper carriage. Nonzero even when the arm is holding still against gravity.
+    include_effort: bool = False
+
+    # Include per-joint external effort (`.ext_eff`) in observations. This is the estimated
+    # externally applied effort, after gravity and friction compensation. Measured in Nm for the
+    # arm joints and N for the gripper carriage. Useful for contact and force sensing; an unloaded
+    # arm reports values near zero.
+    include_external_effort: bool = False
+
     # cameras
     cameras: dict[str, CameraConfig] = field(default_factory=dict)
     # Troubleshooting: If one of your IntelRealSense cameras freeze during

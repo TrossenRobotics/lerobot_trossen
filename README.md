@@ -94,6 +94,38 @@ uv run lerobot-record \
   --dataset.single_task="Grab and handover the red cube to the other arm"
 ```
 
+### Optional Observation Features
+
+By default, WidowX AI followers only observe joint positions (`<joint>.pos`).
+You can optionally record additional per-joint signals by enabling the following flags.
+All are disabled by default.
+
+| Flag | Observation key | Description |
+| ---- | --------------- | ----------- |
+| `include_velocity` | `<joint>.vel` | Joint velocity. Measured in rad/s for the arm joints and m/s for the gripper carriage. |
+| `include_effort` | `<joint>.eff` | Total motor effort, combining gravity, friction, and any external load. Measured in Nm for the arm joints and N for the gripper carriage. Nonzero even when the arm is holding still against gravity. |
+| `include_external_effort` | `<joint>.ext_eff` | Estimated externally applied effort, after gravity and friction compensation. Measured in Nm for the arm joints and N for the gripper carriage. Useful for contact and force sensing; an unloaded arm reports values near zero. |
+
+Pass them as `--robot.<flag>=true` when running any command that constructs the robot (for example `lerobot-record` or `lerobot-teleoperate`). For example, to record with all three enabled on a single WidowX AI follower:
+
+```shell
+uv run lerobot-record \
+  --robot.type=widowxai_follower_robot \
+  --robot.ip_address=192.168.1.4 \
+  --robot.id=follower \
+  --robot.include_velocity=true \
+  --robot.include_effort=true \
+  --robot.include_external_effort=true \
+  --dataset.repo_id=${HF_USER}/widowxai-cube-pickup \
+  --dataset.single_task="Grab the cube" \
+  --teleop.type=widowxai_leader_teleop \
+  --teleop.ip_address=192.168.1.2 \
+  --teleop.id=leader
+```
+
+The same flags are available on the bimanual (`bi_widowxai_follower_robot`) and Mobile AI (`mobileai_robot`) configurations, where they are shared across both arms.
+The resulting observation keys are prefixed per arm, e.g. `left_<joint>.eff` and `right_<joint>.eff`.
+
 ### Dataset Visualization
 
 If you uploaded your dataset to the Hugging Face Hub using ``--control.push_to_hub=true``, you can [visualize your dataset online](https://huggingface.co/spaces/lerobot/visualize_dataset).

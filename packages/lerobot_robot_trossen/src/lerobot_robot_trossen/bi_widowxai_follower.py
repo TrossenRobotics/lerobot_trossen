@@ -1,6 +1,5 @@
 import logging
 import time
-from functools import cached_property
 from typing import Any
 
 from lerobot.cameras.utils import make_cameras_from_configs
@@ -34,6 +33,9 @@ class BiWidowXAIFollowerRobot(Robot):
             max_relative_target=config.left_arm_max_relative_target,
             min_time_to_move_multiplier=config.min_time_to_move_multiplier,
             loop_rate=config.loop_rate,
+            include_velocity=config.include_velocity,
+            include_effort=config.include_effort,
+            include_external_effort=config.include_external_effort,
             cameras={},
         )
 
@@ -43,6 +45,9 @@ class BiWidowXAIFollowerRobot(Robot):
             max_relative_target=config.right_arm_max_relative_target,
             min_time_to_move_multiplier=config.min_time_to_move_multiplier,
             loop_rate=config.loop_rate,
+            include_velocity=config.include_velocity,
+            include_effort=config.include_effort,
+            include_external_effort=config.include_external_effort,
             cameras={},
         )
 
@@ -52,29 +57,29 @@ class BiWidowXAIFollowerRobot(Robot):
         self.cameras = make_cameras_from_configs(config.cameras)
 
     @property
-    def _joint_ft(self) -> dict[str, type]:
-        return {
-            f"left_{joint_name}.pos": float
-            for joint_name in self.left_arm.config.joint_names
-        } | {
-            f"right_{joint_name}.pos": float
-            for joint_name in self.right_arm.config.joint_names
-        }
-
-    @property
     def _cameras_ft(self) -> dict[str, tuple]:
         return {
             cam: (self.config.cameras[cam].height, self.config.cameras[cam].width, 3)
             for cam in self.cameras
         }
 
-    @cached_property
+    @property
     def observation_features(self) -> dict[str, type | tuple]:
-        return {**self._joint_ft, **self._cameras_ft}
+        # Derive from each arm (sub-arms have no cameras of their own) so that the per-joint
+        # velocity/effort flags are reflected automatically, then add the shared cameras.
+        arm_ft = {
+            f"left_{key}": ft for key, ft in self.left_arm.observation_features.items()
+        } | {
+            f"right_{key}": ft
+            for key, ft in self.right_arm.observation_features.items()
+        }
+        return {**arm_ft, **self._cameras_ft}
 
-    @cached_property
+    @property
     def action_features(self) -> dict[str, type]:
-        return self._joint_ft
+        return {
+            f"left_{key}": ft for key, ft in self.left_arm.action_features.items()
+        } | {f"right_{key}": ft for key, ft in self.right_arm.action_features.items()}
 
     @property
     def is_connected(self) -> bool:

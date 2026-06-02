@@ -1,7 +1,6 @@
 import logging
 import threading
 import time
-from functools import cached_property
 from typing import Any
 
 from trossen_slate import TrossenSlate
@@ -44,6 +43,9 @@ class MobileAIRobot(Robot):
             right_arm_max_relative_target=config.right_arm_max_relative_target,
             min_time_to_move_multiplier=config.min_time_to_move_multiplier,
             loop_rate=config.loop_rate,
+            include_velocity=config.include_velocity,
+            include_effort=config.include_effort,
+            include_external_effort=config.include_external_effort,
             cameras={},
         )
 
@@ -53,10 +55,8 @@ class MobileAIRobot(Robot):
         self.cameras = make_cameras_from_configs(config.cameras)
 
     @property
-    def _joint_ft(self) -> dict[str, type]:
-        arms_ft = self.arms._joint_ft
-        base_ft = {"x.vel": float, "theta.vel": float}
-        return {**arms_ft, **base_ft}
+    def _base_ft(self) -> dict[str, type]:
+        return {"x.vel": float, "theta.vel": float}
 
     @property
     def _cameras_ft(self) -> dict[str, tuple]:
@@ -65,13 +65,15 @@ class MobileAIRobot(Robot):
             for cam in self.cameras
         }
 
-    @cached_property
+    @property
     def observation_features(self) -> dict[str, type | tuple]:
-        return {**self._joint_ft, **self._cameras_ft}
+        # Arm features (flag-aware: .pos plus optional .vel/.eff/.ext_eff) come from the bimanual
+        # arms, plus the mobile base velocity and the shared cameras.
+        return {**self.arms.observation_features, **self._base_ft, **self._cameras_ft}
 
-    @cached_property
+    @property
     def action_features(self) -> dict[str, type]:
-        return self._joint_ft
+        return {**self.arms.action_features, **self._base_ft}
 
     @property
     def is_connected(self) -> bool:
