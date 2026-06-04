@@ -11,7 +11,8 @@ See the [Trossen AI documentation](https://docs.trossenrobotics.com/trossen_arm/
 We use `uv` to manage our dependencies.
 Follow the instructions [here](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
 
-This package requires **Python ≥ 3.12** (it depends on `lerobot >= 0.5.1`, which requires 3.12). `uv` provisions a compatible interpreter automatically.
+This package requires **Python ≥ 3.12** (it depends on `lerobot >= 0.5.1`, which requires 3.12).
+`uv` provisions a compatible interpreter automatically.
 
 Run the following command to install this package and its dependencies:
 
@@ -154,23 +155,18 @@ uv run lerobot-record \
   --policy.path=${HF_USER}/act-widowxai-cube-pickup
 ```
 
+> [!NOTE]
 > The example above uses an **ACT** policy, which the lean base install runs directly.
-> **VLA policies (π₀, π₀.₅, SmolVLA) need extra dependencies** (transformers/peft) that the
-> base install omits — prefix the command with `uv run --with "lerobot[pi]>=0.5.1"` (use
-> `[smolvla]` for SmolVLA). For responsive on-robot VLA evaluation, prefer the
-> **Async Inference** flow below.
+> **VLA policies (π₀, π₀.₅, SmolVLA) need extra dependencies** (transformers/peft) that the base install omits — prefix the command with `uv run --with "lerobot[pi]>=0.5.1"` (use `[smolvla]` for SmolVLA).
+> For responsive on-robot VLA evaluation, prefer the **Async Inference** flow below.
 
 ### Async Inference (Policy Server + Robot Client)
 
-For asynchronous / distributed inference, LeRobot runs the policy in a separate
-**policy server** process and the robot in a **client** process, communicating over gRPC.
-This is the recommended path for slow VLA policies (π₀, π₀.₅, SmolVLA): the client keeps
-the robot control loop responsive while the server runs inference, and overlapping action
-chunks are blended on the client (real-time chunking).
+For asynchronous / distributed inference, LeRobot runs the policy in a separate **policy server** process and the robot in a **client** process, communicating over gRPC.
+This is the recommended path for slow VLA policies (π₀, π₀.₅, SmolVLA): the client keeps the robot control loop responsive while the server runs inference, and overlapping action chunks are blended on the client (real-time chunking).
 
-The server and client live in **upstream LeRobot**, and they need dependencies the lean
-base install omits: `async` (the `grpcio` transport) and, for π-family policies, `pi`
-(transformers/peft). Layer them at run time with `uv run --with` (requires Python ≥ 3.12):
+The server and client live in **upstream LeRobot**, and they need dependencies the lean base install omits: `async` (the `grpcio` transport) and, for π-family policies, `pi` (transformers/peft).
+Layer them at run time with `uv run --with` (requires Python ≥ 3.12):
 
 **Terminal A — policy server** (holds the policy on the GPU):
 
@@ -191,8 +187,6 @@ uv run --with "lerobot[async,pi]>=0.5.1" python -m lerobot.async_inference.robot
   --robot.type=bi_widowxai_follower_robot \
   --robot.left_arm_ip_address=192.168.1.5 \
   --robot.right_arm_ip_address=192.168.1.4 \
-  --robot.left_arm_max_relative_target=0.5 \
-  --robot.right_arm_max_relative_target=0.5 \
   --robot.id=bimanual_follower \
   --robot.cameras='{
       cam_high: {type: intelrealsense, serial_number_or_name: "<serial>", width: 640, height: 480, fps: 30},
@@ -211,16 +205,12 @@ uv run --with "lerobot[async,pi]>=0.5.1" python -m lerobot.async_inference.robot
 
 Notes:
 
-- The Trossen robots **auto-register** — LeRobot discovers the installed `lerobot_robot_trossen`
-  plugin, so `--robot.type=bi_widowxai_follower_robot` resolves with no manual import.
+- The Trossen robots **auto-register** — LeRobot discovers the installed `lerobot_robot_trossen` plugin, so `--robot.type=bi_widowxai_follower_robot` resolves with no manual import.
 - The model loads on the **first** client connection (large VLAs take 1–2 min) before the first action.
 - The `--task` prompt **must match training** (π-family policies are language-conditioned).
-- `--actions_per_chunk`, `--chunk_size_threshold`, and `--aggregate_fn_name` control real-time
-  chunking: how many predicted steps to execute per chunk, when to re-query the server, and how
-  overlapping steps are blended (`weighted_average`).
+- `--actions_per_chunk`, `--chunk_size_threshold`, and `--aggregate_fn_name` control real-time chunking: how many predicted steps to execute per chunk, when to re-query the server, and how overlapping steps are blended (`weighted_average`).
 - The client strictly only needs `lerobot[async]`; using `[async,pi]` on both is identical and simplest.
-- Start with conservative `--robot.*_max_relative_target` caps and keep an e-stop within reach;
-  remove the caps once you trust the motion. Stop the **client** first (`Ctrl-C`), then the server.
+- Stop the **client** first (`Ctrl-C`), then the server.
 
 ### Replay Script
 
