@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Trossen Robotics LeRobot integration"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 
 dependencies = [
   "lerobot_robot_trossen>=0.1.0",
