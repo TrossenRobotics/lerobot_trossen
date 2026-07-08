@@ -58,10 +58,14 @@ class BiWidowXAIFollowerRobot(Robot):
 
     @property
     def _cameras_ft(self) -> dict[str, tuple]:
-        return {
-            cam: (self.config.cameras[cam].height, self.config.cameras[cam].width, 3)
-            for cam in self.cameras
-        }
+        # Depth cameras add a separate (H, W, 1) "<cam>_depth" feature; single channel flags it as depth.
+        features: dict[str, tuple] = {}
+        for cam_key, cam in self.cameras.items():
+            if getattr(cam, "use_rgb", True):
+                features[cam_key] = (cam.height, cam.width, 3)
+            if getattr(cam, "use_depth", False):
+                features[f"{cam_key}_depth"] = (cam.height, cam.width, 1)
+        return features
 
     @property
     def observation_features(self) -> dict[str, type | tuple]:
@@ -123,12 +127,19 @@ class BiWidowXAIFollowerRobot(Robot):
         right_obs = self.right_arm.get_observation()
         obs_dict.update({f"right_{key}": val for key, val in right_obs.items()})
 
-        # Capture images from cameras
+        # read_latest*() is a non-blocking peek of the latest frame; depth cameras also yield "<cam>_depth".
         for cam_key, cam in self.cameras.items():
-            start = time.perf_counter()
-            obs_dict[cam_key] = cam.async_read()
-            dt_ms = (time.perf_counter() - start) * 1e3
-            logger.debug(f"{self} read {cam_key}: {dt_ms:.1f}ms")
+            if getattr(cam, "use_rgb", True):
+                start = time.perf_counter()
+                obs_dict[cam_key] = cam.read_latest()
+                dt_ms = (time.perf_counter() - start) * 1e3
+                logger.debug(f"{self} read {cam_key}: {dt_ms:.1f}ms")
+
+            if getattr(cam, "use_depth", False):
+                start = time.perf_counter()
+                obs_dict[f"{cam_key}_depth"] = cam.read_latest_depth()
+                dt_ms = (time.perf_counter() - start) * 1e3
+                logger.debug(f"{self} read {cam_key} depth: {dt_ms:.1f}ms")
 
         return obs_dict
 
