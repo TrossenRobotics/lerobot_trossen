@@ -11,7 +11,7 @@ See the [Trossen AI documentation](https://docs.trossenrobotics.com/trossen_arm/
 We use `uv` to manage our dependencies.
 Follow the instructions [here](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
 
-This package requires **Python ≥ 3.12** (it depends on `lerobot >= 0.5.1`, which requires 3.12).
+This package requires **Python ≥ 3.12** (it depends on `lerobot >= 0.6.0`, which requires 3.12).
 `uv` provisions a compatible interpreter automatically.
 
 Run the following command to install this package and its dependencies:
@@ -157,7 +157,7 @@ uv run lerobot-record \
 
 > [!NOTE]
 > The example above uses an **ACT** policy, which the lean base install runs directly.
-> **VLA policies (π₀, π₀.₅, SmolVLA) need extra dependencies** (transformers/peft) that the base install omits — prefix the command with `uv run --with "lerobot[pi]>=0.5.1"` (use `[smolvla]` for SmolVLA).
+> **VLA policies (π₀, π₀.₅, SmolVLA) need extra dependencies** (transformers/peft) that the base install omits — prefix the command with `uv run --with "lerobot[pi]>=0.6.0"` (use `[smolvla]` for SmolVLA).
 > For responsive on-robot VLA evaluation, prefer the **Async Inference** flow below.
 
 ### Async Inference (Policy Server + Robot Client)
@@ -171,7 +171,7 @@ Layer them at run time with `uv run --with` (requires Python ≥ 3.12):
 **Terminal A — policy server** (holds the policy on the GPU):
 
 ```shell
-uv run --with "lerobot[async,pi]>=0.5.1" python -m lerobot.async_inference.policy_server \
+uv run --with "lerobot[async,pi]>=0.6.0" python -m lerobot.async_inference.policy_server \
   --host=127.0.0.1 \
   --port=8080 \
   --fps=30 \
@@ -182,7 +182,7 @@ uv run --with "lerobot[async,pi]>=0.5.1" python -m lerobot.async_inference.polic
 **Terminal B — robot client** (drives the hardware):
 
 ```shell
-uv run --with "lerobot[async,pi]>=0.5.1" python -m lerobot.async_inference.robot_client \
+uv run --with "lerobot[async,pi]>=0.6.0" python -m lerobot.async_inference.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=bi_widowxai_follower_robot \
   --robot.left_arm_ip_address=192.168.1.5 \

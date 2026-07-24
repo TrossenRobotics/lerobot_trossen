@@ -11,7 +11,8 @@ license = "Apache-2.0"
 license-files = ["LICENSE"]
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
-dependencies = ["lerobot[intelrealsense]>=0.5.1", "trossen_arm>=1.9.0"]
+# See the robot package for why 0.6.0 and "core-scripts" are required.
+dependencies = ["lerobot[intelrealsense,core-scripts]>=0.6.0", "trossen_arm>=1.9.0"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
