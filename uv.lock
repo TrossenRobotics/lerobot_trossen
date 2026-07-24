@@ -1962,21 +1962,21 @@ wheels = [
 
 [[package]]
 name = "trossen-arm"
-version = "1.9.0"
+version = "1.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7d/08/27441047e87ca0521c81639476c25e6a68b0d8ef2993c6674d0ddbf05739/trossen_arm-1.9.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:c3bd5605f4f2eaae38a52f9547221c8c5d94fa5410d30bc3513b085d61a43ea0", size = 777957, upload-time = "2025-09-10T21:56:58.596Z" },
-    { url = "https://files.pythonhosted.org/packages/e8/f0/6910b5bd1f7c7d3e85fd69fb8f4701c2048bafef211e936bc65007050e6c/trossen_arm-1.9.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:8330b506c1a0d38c900afa23e919fd89d592178a9565de116129a5fbcf982bda", size = 1113518, upload-time = "2025-09-10T21:57:00.217Z" },
-    { url = "https://files.pythonhosted.org/packages/bb/db/72015ec080ce26f18c6942ed5a3bcba133bdd0804867783ddbde2ba25452/trossen_arm-1.9.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:315a99ab11590efb1b0e5f9ee38386d7a99c8e11c1046d2bd7021608322cda26", size = 1219968, upload-time = "2025-09-10T21:57:01.371Z" },
-    { url = "https://files.pythonhosted.org/packages/be/64/c327b6d8d1e9ff3131877ce16fa64d5d48570019745b4c874e42b2d09842/trossen_arm-1.9.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:845c0da526b397e5839684c8aafce048976a5eb9d2a699093adc3b64606c3af5", size = 779065, upload-time = "2025-09-10T21:57:02.848Z" },
-    { url = "https://files.pythonhosted.org/packages/7d/3e/e0115b3518df5b0a65d515fab496b335f4c80db94f25b8e333c93d98f37c/trossen_arm-1.9.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5a4d4a412b219b1770e2536b10ebf78bd49d0af351f5e7f37c43939a4584934f", size = 1114937, upload-time = "2025-09-10T21:57:04.389Z" },
-    { url = "https://files.pythonhosted.org/packages/28/de/15b9f1cf588a0d050f0b08c90a73aac4bd5028b9890f6716f159fa04c7a2/trossen_arm-1.9.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:07c70a5efc085453e4c007f01b59c300ed72cc7a78c4459227b816190127a210", size = 1222221, upload-time = "2025-09-10T21:57:05.473Z" },
-    { url = "https://files.pythonhosted.org/packages/7a/53/31154daca8c4d7481e8638c6c2984da4f483967f0de81c2c2b3977ed505c/trossen_arm-1.9.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:f6ce500a48d29f372764718526771e857a92029658dc3bcd3b311683d49a44d9", size = 750207, upload-time = "2025-09-10T21:57:07.115Z" },
-    { url = "https://files.pythonhosted.org/packages/0a/2e/913a9888e30f42ca197dcfce74eb611b36cf07d89591c1e35b96dd5f7dbd/trossen_arm-1.9.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e9d0fbaadba04cb2dc6676667f45a9c9c27808f70c6ebaaa1a866132d00186cc", size = 1114970, upload-time = "2025-09-10T21:57:08.583Z" },
-    { url = "https://files.pythonhosted.org/packages/62/aa/4c4aee012dc10825eb41f6b5bea522cf67f86b34f39a40209f2333999de9/trossen_arm-1.9.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:685ad5e769ca0030b5adec48d12c3c4d3bf0590cd011aab9972b1ec8f3daeb9f", size = 1220924, upload-time = "2025-09-10T21:57:09.654Z" },
+    { url = "https://files.pythonhosted.org/packages/65/a8/c298b54bcf8c25e85087e8f1b4b43636bbcd8f0c70e5624208fe0c54b47b/trossen_arm-1.11.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:3a5b31b42d6491be483e740f9c9aee9bf245d9782f7769ca6f9eaa8ec73df5b5", size = 746128, upload-time = "2026-07-01T23:47:15.224Z" },
+    { url = "https://files.pythonhosted.org/packages/4f/2f/10e8ae1c7c8c9e074fca0fc8727e3cfde279a1a72e896248477aaac9e0f5/trossen_arm-1.11.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:39528d20cb0540d34aa80b757b0198ac5fe261c2729869e663953352def5f037", size = 1156139, upload-time = "2026-07-01T23:47:16.671Z" },
+    { url = "https://files.pythonhosted.org/packages/00/a9/3d1f400653c62c05a4ad62c996f3ddcf25783ba595e89223cd23de14571a/trossen_arm-1.11.0-cp310-cp310-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:032200220c20dcea95e371ef5208378ff622f761865692c5ec6b34dbf07abc0d", size = 978677, upload-time = "2026-07-01T23:47:18.082Z" },
+    { url = "https://files.pythonhosted.org/packages/2c/1e/ea1b83640f0561a1f1b4671b8acdd2d0fa4d1eb95ec30dd0810565f65535/trossen_arm-1.11.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:cc208d6fa733eeb8642b33940b238742f96a217faf405e3363a4bceb9011b99f", size = 747814, upload-time = "2026-07-01T23:47:19.201Z" },
+    { url = "https://files.pythonhosted.org/packages/b5/83/82088d9e747b5d44a922d551309740162299f2b29b47c3516fc27a2083fa/trossen_arm-1.11.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:e70d0436e6eeb4a4d094282d7118ff562da7ed528339531d0caa77c906716b18", size = 1156918, upload-time = "2026-07-01T23:47:20.363Z" },
+    { url = "https://files.pythonhosted.org/packages/4e/a8/1a09f3372d4a2d88bf2e977ff3d4e2afd74cd25d63128fa48548960a69de/trossen_arm-1.11.0-cp311-cp311-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:7a2f169c3ff55dd17e5c150b5e48c8f58079a6386a6f91bc19c19843966b040b", size = 980217, upload-time = "2026-07-01T23:47:21.842Z" },
+    { url = "https://files.pythonhosted.org/packages/2e/37/1a61b635b944a619726c614aa146fdd67ac8096fc36bd9c7428dc366f2db/trossen_arm-1.11.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:835c2e547d5239e15963df3659f4f26ae772e25df524e9f99849dda23ca7b4a9", size = 753053, upload-time = "2026-07-01T23:47:22.99Z" },
+    { url = "https://files.pythonhosted.org/packages/17/16/c7d4d318eee4632bbe84bc7928c792635be7e5186a94aa8954e864739248/trossen_arm-1.11.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:654b03ea7055f8bca38be0fc03d625cd2fc11dc7290ec09ca00075e4d25744f8", size = 1159854, upload-time = "2026-07-01T23:47:24.184Z" },
+    { url = "https://files.pythonhosted.org/packages/72/c9/2d6b5c0b345ee7728a8570027745c3675383342bd236d425bbd85e41c30c/trossen_arm-1.11.0-cp312-cp312-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:96549d0a266a1104e0648e1278dae85e5f743e372ef378c22d66612da09c0a52", size = 981086, upload-time = "2026-07-01T23:47:25.655Z" },
 ]
 
 [[package]]
