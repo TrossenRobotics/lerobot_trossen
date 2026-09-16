@@ -17,7 +17,8 @@ requires-python = ">=3.12,<3.13"
 dependencies = [
   "lerobot[intelrealsense,core-scripts]>=0.6.0",
   "trossen_arm>=1.9.0",
-  "trossen-slate>=0.0.3",
+  # SLATE base driver: Linux wheels only, and only needed by the Mobile AI robot.
+  "trossen-slate>=0.0.3; sys_platform == 'linux'",
 ]
 
 [tool.setuptools.packages.find]

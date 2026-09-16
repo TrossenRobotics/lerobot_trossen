@@ -3,8 +3,6 @@ import threading
 import time
 from typing import Any
 
-from trossen_slate import TrossenSlate
-
 from lerobot.cameras.utils import make_cameras_from_configs
 from lerobot.robots import Robot
 
@@ -50,6 +48,9 @@ class MobileAIRobot(Robot):
         )
 
         self.arms = BiWidowXAIFollowerRobot(arms_config)
+        # Linux-only; importing at module level breaks the package on macOS.
+        from trossen_slate import TrossenSlate
+
         self.base = TrossenSlate()
 
         self.cameras = make_cameras_from_configs(config.cameras)

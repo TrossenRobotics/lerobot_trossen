@@ -539,14 +539,14 @@ source = { editable = "packages/lerobot_robot_trossen" }
 dependencies = [
     { name = "lerobot", extra = ["core-scripts", "intelrealsense"] },
     { name = "trossen-arm" },
-    { name = "trossen-slate" },
+    { name = "trossen-slate", marker = "sys_platform == 'linux'" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "lerobot", extras = ["intelrealsense", "core-scripts"], specifier = ">=0.6.0" },
     { name = "trossen-arm", specifier = ">=1.9.0" },
-    { name = "trossen-slate", specifier = ">=0.0.3" },
+    { name = "trossen-slate", marker = "sys_platform == 'linux'", specifier = ">=0.0.3" },
 ]
 
 [[package]]
@@ -571,14 +571,14 @@ source = { virtual = "." }
 dependencies = [
     { name = "lerobot-robot-trossen" },
     { name = "lerobot-teleoperator-trossen" },
-    { name = "trossen-slate" },
+    { name = "trossen-slate", marker = "sys_platform == 'linux'" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "lerobot-robot-trossen", editable = "packages/lerobot_robot_trossen" },
     { name = "lerobot-teleoperator-trossen", editable = "packages/lerobot_teleoperator_trossen" },
-    { name = "trossen-slate", specifier = ">=0.0.3" },
+    { name = "trossen-slate", marker = "sys_platform == 'linux'", specifier = ">=0.0.3" },
 ]
 
 [[package]]
