@@ -11,6 +11,10 @@ from lerobot_teleoperator_trossen.config_widowxai_leader import (
 
 logger = logging.getLogger(__name__)
 
+# A fault that recurs on back-to-back reads is not a transient dropout, so stop
+# healing and let it surface rather than thrashing the CAN bus mid-episode.
+MAX_CONSECUTIVE_RECOVERIES = 3
+
 
 class WidowXAILeaderTeleop(Teleoperator):
     """
@@ -24,6 +28,7 @@ class WidowXAILeaderTeleop(Teleoperator):
         super().__init__(config)
         self.config = config
         self.driver = trossen_arm.TrossenArmDriver()
+        self._consecutive_recoveries = 0
 
     @property
     def action_features(self) -> dict[str, type]:
@@ -72,6 +77,9 @@ class WidowXAILeaderTeleop(Teleoperator):
             goal_time=2.0,
             blocking=True,
         )
+        self._enable_gravity_compensation()
+
+    def _enable_gravity_compensation(self) -> None:
         self.driver.set_all_modes(trossen_arm.Mode.external_effort)
         # Set all external efforts to 0.0 to enable gravity compensation
         self.driver.set_all_external_efforts(
@@ -80,9 +88,32 @@ class WidowXAILeaderTeleop(Teleoperator):
             blocking=True,
         )
 
+    def _recover_from_fault(self) -> None:
+        """Clear a latched controller fault in place, without re-staging the arm.
+
+        clear_error() reconnects and reconfigures but commands no motion, so the
+        arm stays where the operator is holding it. It does reset the joint modes
+        to idle, hence restoring gravity compensation here.
+        """
+        self.driver.clear_error()
+        self._enable_gravity_compensation()
+
     def get_action(self) -> dict[str, float]:
         start = time.perf_counter()
-        action = self.driver.get_all_positions()
+        try:
+            action = self.driver.get_all_positions()
+            self._consecutive_recoveries = 0
+        except RuntimeError:
+            self._consecutive_recoveries += 1
+            if self._consecutive_recoveries > MAX_CONSECUTIVE_RECOVERIES:
+                raise
+            logger.warning(
+                f"{self} fault during read "
+                f"({self._consecutive_recoveries}/{MAX_CONSECUTIVE_RECOVERIES}); "
+                f"clearing and continuing without re-staging."
+            )
+            self._recover_from_fault()
+            action = self.driver.get_all_positions()
         action_dict = {
             f"{joint_name}.pos": val
             for joint_name, val in zip(
