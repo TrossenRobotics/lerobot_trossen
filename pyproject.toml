@@ -10,11 +10,21 @@ dependencies = [
   "lerobot_robot_trossen>=0.1.0",
   "lerobot_teleoperator_trossen>=0.1.0",
   "trossen-slate>=0.0.3; sys_platform == 'linux'",
+  # Direct dependencies so that the Linux cu128 source below applies to them
+  "torch",
+  "torchvision",
 ]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
 
 [tool.uv.sources]
 lerobot_robot_trossen = { workspace = true }
 lerobot_teleoperator_trossen = { workspace = true }
+torch = [{ index = "pytorch-cu128", marker = "sys_platform == 'linux'" }]
+torchvision = [{ index = "pytorch-cu128", marker = "sys_platform == 'linux'" }]
 
 [tool.uv.workspace]
 members = ["packages/*"]
