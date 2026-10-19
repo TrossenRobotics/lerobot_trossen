@@ -12,6 +12,10 @@ dependencies = [
   "trossen-slate>=0.0.3; sys_platform == 'linux'",
 ]
 
+[project.optional-dependencies]
+realsense = ["lerobot_robot_trossen[realsense]"]
+
+
 [tool.uv.sources]
 lerobot_robot_trossen = { workspace = true }
 lerobot_teleoperator_trossen = { workspace = true }

@@ -15,11 +15,15 @@ requires-python = ">=3.12,<3.13"
 # 0.6.0 slimmed the base install, so the dataset/hardware/viz deps that lerobot-record
 # and lerobot-teleoperate need now come from the "core-scripts" extra.
 dependencies = [
-  "lerobot[intelrealsense,core-scripts]>=0.6.0",
+  "lerobot[core-scripts]>=0.6.0",
   "trossen_arm>=1.9.0",
   # SLATE base driver: Linux wheels only, and only needed by the Mobile AI robot.
   "trossen-slate>=0.0.3; sys_platform == 'linux'",
 ]
+
+[project.optional-dependencies]
+# Intel RealSense camera support (`--robot.cameras` with `type: intelrealsense`), including depth.
+realsense = ["lerobot[intelrealsense]>=0.6.0"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -537,30 +537,37 @@ name = "lerobot-robot-trossen"
 version = "0.1.0"
 source = { editable = "packages/lerobot_robot_trossen" }
 dependencies = [
-    { name = "lerobot", extra = ["core-scripts", "intelrealsense"] },
+    { name = "lerobot", extra = ["core-scripts"] },
     { name = "trossen-arm" },
     { name = "trossen-slate", marker = "sys_platform == 'linux'" },
 ]
 
+[package.optional-dependencies]
+realsense = [
+    { name = "lerobot", extra = ["intelrealsense"] },
+]
+
 [package.metadata]
 requires-dist = [
-    { name = "lerobot", extras = ["intelrealsense", "core-scripts"], specifier = ">=0.6.0" },
+    { name = "lerobot", extras = ["core-scripts"], specifier = ">=0.6.0" },
+    { name = "lerobot", extras = ["intelrealsense"], marker = "extra == 'realsense'", specifier = ">=0.6.0" },
     { name = "trossen-arm", specifier = ">=1.9.0" },
     { name = "trossen-slate", marker = "sys_platform == 'linux'", specifier = ">=0.0.3" },
 ]
+provides-extras = ["realsense"]
 
 [[package]]
 name = "lerobot-teleoperator-trossen"
 version = "0.1.0"
 source = { editable = "packages/lerobot_teleoperator_trossen" }
 dependencies = [
-    { name = "lerobot", extra = ["core-scripts", "intelrealsense"] },
+    { name = "lerobot", extra = ["core-scripts"] },
     { name = "trossen-arm" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "lerobot", extras = ["intelrealsense", "core-scripts"], specifier = ">=0.6.0" },
+    { name = "lerobot", extras = ["core-scripts"], specifier = ">=0.6.0" },
     { name = "trossen-arm", specifier = ">=1.9.0" },
 ]
 
@@ -574,12 +581,19 @@ dependencies = [
     { name = "trossen-slate", marker = "sys_platform == 'linux'" },
 ]
 
+[package.optional-dependencies]
+realsense = [
+    { name = "lerobot-robot-trossen", extra = ["realsense"] },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "lerobot-robot-trossen", editable = "packages/lerobot_robot_trossen" },
+    { name = "lerobot-robot-trossen", extras = ["realsense"], marker = "extra == 'realsense'", editable = "packages/lerobot_robot_trossen" },
     { name = "lerobot-teleoperator-trossen", editable = "packages/lerobot_teleoperator_trossen" },
     { name = "trossen-slate", marker = "sys_platform == 'linux'", specifier = ">=0.0.3" },
 ]
+provides-extras = ["realsense"]
 
 [[package]]
 name = "markdown-it-py"
