@@ -86,7 +86,6 @@ class WidowXFollower(Robot):
             raise DeviceAlreadyConnectedError(f"{self} already connected")
 
         match self.config.model:
-
             # TODO(@schromya): Add add proper end-effectors for each model when released
             case WidowXFollowerModel.CORE:
                 self.driver.configure(
