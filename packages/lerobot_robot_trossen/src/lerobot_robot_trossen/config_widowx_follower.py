@@ -1,27 +1,14 @@
 from dataclasses import dataclass, field
-from enum import Enum
 
-import numpy as np
 from lerobot.cameras import CameraConfig
 from lerobot.robots.config import RobotConfig
 
 
-
-class WidowXFollowerModel(str, Enum):
-    CORE = "core"
-    PRO = "pro"
-    HEAVY = "heavy"
-    WXAI = "wxai"
-
-
-@RobotConfig.register_subclass("widowx_follower_robot")
+# Shared configuration for all WidowX followers.
 @dataclass
 class WidowXFollowerConfig(RobotConfig):
     # IP address of the arm
     ip_address: str
-
-    # Model of the WidowX arm.
-    model: WidowXFollowerModel
 
     # `max_relative_target` limits the magnitude of the relative positional target vector for
     # safety purposes. Set this to a positive scalar to have the same value for all motors
@@ -77,3 +64,21 @@ class WidowXFollowerConfig(RobotConfig):
     staged_positions: list[float] = field(
         default_factory=lambda: [0, 0, 0, 0, 0, 0, 0]
     )
+
+
+@RobotConfig.register_subclass("widowxcore_follower_robot")
+@dataclass
+class WidowXCoreFollowerConfig(WidowXFollowerConfig):
+    pass
+
+
+@RobotConfig.register_subclass("widowxpro_follower_robot")
+@dataclass
+class WidowXProFollowerConfig(WidowXFollowerConfig):
+    pass
+
+
+@RobotConfig.register_subclass("widowxheavy_follower_robot")
+@dataclass
+class WidowXHeavyFollowerConfig(WidowXFollowerConfig):
+    pass

@@ -1,7 +1,11 @@
 from .bi_widowxai_follower import BiWidowXAIFollowerRobot
 from .config_bi_widowxai_follower import BiWidowXAIFollowerRobotConfig
 from .config_widowxai_follower import WidowXAIFollowerConfig
-from .config_widowx_follower import WidowXFollowerConfig, WidowXFollowerModel
+from .config_widowx_follower import (
+    WidowXCoreFollowerConfig,
+    WidowXHeavyFollowerConfig,
+    WidowXProFollowerConfig,
+)
 from .widowxai_follower import WidowXAIFollower
 from .mobileai import MobileAIRobot
 from .config_mobileai import MobileAIRobotConfig

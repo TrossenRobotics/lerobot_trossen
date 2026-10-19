@@ -1,3 +1,4 @@
+import abc
 import logging
 import time
 from typing import Any
@@ -8,18 +9,17 @@ from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnected
 from lerobot.robots.robot import Robot
 from lerobot.robots.utils import ensure_safe_goal_position
 
-from lerobot_robot_trossen.config_widowx_follower import WidowXFollowerConfig, WidowXFollowerModel
+from lerobot_robot_trossen.config_widowx_follower import (
+    WidowXFollowerConfig, WidowXCoreFollowerConfig,  WidowXHeavyFollowerConfig,
+    WidowXProFollowerConfig
+)
 
 logger = logging.getLogger(__name__)
 
-
 class WidowXFollower(Robot):
     """
-    [WidowX](https://www.trossenrobotics.com/widowx) by Trossen Robotics
+    [WidowX](https://www.trossenrobotics.com/widowx) Series Abstract class by Trossen Robotics
     """
-
-    config_class = WidowXFollowerConfig
-    name = "widowxai_follower_robot"
 
     def __init__(self, config: WidowXFollowerConfig):
         super().__init__(config)
@@ -85,41 +85,10 @@ class WidowXFollower(Robot):
         if self.is_connected:
             raise DeviceAlreadyConnectedError(f"{self} already connected")
 
-        match self.config.model:
-            # TODO(@schromya): Add add proper end-effectors for each model when released
-            case WidowXFollowerModel.CORE:
-                self.driver.configure(
-                    model=trossen_arm.Model.core,
-                    end_effector=trossen_arm.StandardEndEffector.core_base,
-                    serv_ip=self.config.ip_address,
-                    clear_error=True,
-                )
-            case WidowXFollowerModel.PRO:
-                self.driver.configure(
-                    model=trossen_arm.Model.pro,
-                    end_effector=trossen_arm.StandardEndEffector.pro_base,
-                    serv_ip=self.config.ip_address,
-                    clear_error=True,
-                )
-            case WidowXFollowerModel.HEAVY:
-                self.driver.configure(
-                    model=trossen_arm.Model.heavy,
-                    end_effector=trossen_arm.StandardEndEffector.pro_base,
-                    serv_ip=self.config.ip_address,
-                    clear_error=True,
-                )
-            case WidowXFollowerModel.WXAI:
-                self.driver.configure(
-                    model=trossen_arm.Model.wxai_v0,
-                    end_effector=trossen_arm.StandardEndEffector.wxai_v0_follower,
-                    serv_ip=self.config.ip_address,
-                    clear_error=True,
-                )
-            case _:
-                raise ValueError(f"Unknown WidowX model: {self.config.model}")
-
         if not self.is_calibrated and calibrate:
             self.calibrate()
+
+        self._configure_driver()
 
         for cam in self.cameras.values():
             cam.connect()
@@ -289,3 +258,55 @@ class WidowXFollower(Robot):
             cam.disconnect()
 
         logger.info(f"{self} disconnected.")
+
+    @abc.abstractmethod
+    def _configure_driver(self) -> None:
+        # Hook for subclasses to configure the driver with the correct model/end-effector
+        raise NotImplementedError
+
+
+# TODO(@schromya): Add add proper end-effectors for each model when released
+class WidowXCoreFollower(WidowXFollower):
+    """
+    [WidowX Core](https://www.trossenrobotics.com/widowx) by Trossen Robotics
+    """
+    config_class = WidowXCoreFollowerConfig
+    name = "widowxcore_follower_robot"
+
+    def _configure_driver(self) -> None:
+        self.driver.configure(
+            model=trossen_arm.Model.core,
+            end_effector=trossen_arm.StandardEndEffector.core_base,
+            serv_ip=self.config.ip_address,
+            clear_error=True,
+        )
+
+class WidowXProFollower(WidowXFollower):
+    """
+    [WidowX Pro](https://www.trossenrobotics.com/widowx) by Trossen Robotics
+    """
+    config_class = WidowXProFollowerConfig
+    name = "widowxpro_follower_robot"
+
+    def _configure_driver(self) -> None:
+        self.driver.configure(
+            model=trossen_arm.Model.pro,
+            end_effector=trossen_arm.StandardEndEffector.pro_base,
+            serv_ip=self.config.ip_address,
+            clear_error=True,
+        )
+
+class WidowXHeavyFollower(WidowXFollower):
+    """
+    [WidowX Heavy](https://www.trossenrobotics.com/widowx) by Trossen Robotics
+    """
+    config_class = WidowXHeavyFollowerConfig
+    name = "widowxheavy_follower_robot"
+
+    def _configure_driver(self) -> None:
+        self.driver.configure(
+            model=trossen_arm.Model.heavy,
+            end_effector=trossen_arm.StandardEndEffector.core_base,
+            serv_ip=self.config.ip_address,
+            clear_error=True,
+        )
