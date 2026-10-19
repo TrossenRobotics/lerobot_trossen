@@ -44,7 +44,7 @@ class WidowXFollowerConfig(RobotConfig):
     # data recording due to bandwidth limit, you might need to plug the camera
     # on another USB hub or PCIe card.
 
-    # Joint names for the WidowX AI follower arm
+    # Joint names for the WidowX follower arm
     joint_names: list[str] = field(
         default_factory=lambda: [
             "joint_0",
