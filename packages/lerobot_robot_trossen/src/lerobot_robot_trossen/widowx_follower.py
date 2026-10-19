@@ -8,7 +8,7 @@ from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnected
 from lerobot.robots.robot import Robot
 from lerobot.robots.utils import ensure_safe_goal_position
 
-from lerobot_robot_trossen.config_widowx_follower import WidowXFollowerConfig, WidowXModel
+from lerobot_robot_trossen.config_widowx_follower import WidowXFollowerConfig, WidowXFollowerModel
 
 logger = logging.getLogger(__name__)
 
@@ -88,28 +88,28 @@ class WidowXFollower(Robot):
         match self.config.model:
 
             # TODO(@schromya): Add add proper end-effectors for each model when released
-            case WidowXModel.CORE:
+            case WidowXFollowerModel.CORE:
                 self.driver.configure(
                     model=trossen_arm.Model.core,
                     end_effector=trossen_arm.StandardEndEffector.core_base,
                     serv_ip=self.config.ip_address,
                     clear_error=True,
                 )
-            case WidowXModel.PRO:
+            case WidowXFollowerModel.PRO:
                 self.driver.configure(
                     model=trossen_arm.Model.pro,
                     end_effector=trossen_arm.StandardEndEffector.pro_base,
                     serv_ip=self.config.ip_address,
                     clear_error=True,
                 )
-            case WidowXModel.HEAVY:
+            case WidowXFollowerModel.HEAVY:
                 self.driver.configure(
                     model=trossen_arm.Model.heavy,
                     end_effector=trossen_arm.StandardEndEffector.pro_base,
                     serv_ip=self.config.ip_address,
                     clear_error=True,
                 )
-            case WidowXModel.WXAI:
+            case WidowXFollowerModel.WXAI:
                 self.driver.configure(
                     model=trossen_arm.Model.wxai_v0,
                     end_effector=trossen_arm.StandardEndEffector.wxai_v0_follower,

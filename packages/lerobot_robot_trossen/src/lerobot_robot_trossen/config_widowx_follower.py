@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
+from enum import Enum
 
 import numpy as np
 from lerobot.cameras import CameraConfig
 from lerobot.robots.config import RobotConfig
-from enum import Enum
 
 
-class WidowXModel(str, Enum):
+
+class WidowXFollowerModel(str, Enum):
     CORE = "core"
     PRO = "pro"
     HEAVY = "heavy"
@@ -20,7 +21,7 @@ class WidowXFollowerConfig(RobotConfig):
     ip_address: str
 
     # Model of the WidowX arm.
-    model: WidowXModel
+    model: WidowXFollowerModel
 
     # `max_relative_target` limits the magnitude of the relative positional target vector for
     # safety purposes. Set this to a positive scalar to have the same value for all motors, or a
