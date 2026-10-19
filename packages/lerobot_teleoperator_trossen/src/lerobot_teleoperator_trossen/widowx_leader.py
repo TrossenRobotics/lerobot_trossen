@@ -1,3 +1,4 @@
+import abc
 import logging
 import time
 
@@ -6,7 +7,7 @@ from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnected
 from lerobot.teleoperators.teleoperator import Teleoperator
 
 from lerobot_teleoperator_trossen.config_widowx_leader import (
-    WidowXLeaderTeleopConfig, WidowXLeaderModel
+    WidowXLeaderTeleopConfig, WidowXCoreLeaderTeleopConfig
 )
 
 logger = logging.getLogger(__name__)
@@ -16,9 +17,6 @@ class WidowXLeaderTeleop(Teleoperator):
     """
     [WidowX](https://www.trossenrobotics.com/widowx) by Trossen Robotics
     """
-
-    config_class = WidowXLeaderTeleopConfig
-    name = "widowx_leader_teleop"
 
     def __init__(self, config: WidowXLeaderTeleopConfig):
         super().__init__(config)
@@ -43,38 +41,7 @@ class WidowXLeaderTeleop(Teleoperator):
         if self.is_connected:
             raise DeviceAlreadyConnectedError(f"{self} already connected")
 
-        match self.config.model:
-            # TODO(@schromya): Add add proper end-effectors for each model when released
-            case WidowXLeaderModel.CORE:
-                self.driver.configure(
-                    model=trossen_arm.Model.core,
-                    end_effector=trossen_arm.StandardEndEffector.core_leader,
-                    serv_ip=self.config.ip_address,
-                    clear_error=True,
-                )
-            case WidowXLeaderModel.GLIDE_LEFT:
-                self.driver.configure(
-                    model=trossen_arm.Model.glide_left,
-                    end_effector=trossen_arm.StandardEndEffector.wxai_v0_leader,
-                    serv_ip=self.config.ip_address,
-                    clear_error=True,
-                )
-            case WidowXLeaderModel.GLIDE_RIGHT:
-                self.driver.configure(
-                    model=trossen_arm.Model.glide_right,
-                    end_effector=trossen_arm.StandardEndEffector.wxai_v0_leader,
-                    serv_ip=self.config.ip_address,
-                    clear_error=True,
-                )
-            case WidowXLeaderModel.WXAI:
-                self.driver.configure(
-                    model=trossen_arm.Model.wxai_v0,
-                    end_effector=trossen_arm.StandardEndEffector.wxai_v0_leader,
-                    serv_ip=self.config.ip_address,
-                    clear_error=True,
-                )
-            case _:
-                raise ValueError(f"Unknown WidowX model: {self.config.model}")
+        self._configure_driver()
 
         if not self.is_calibrated and calibrate:
             self.calibrate()
@@ -92,31 +59,21 @@ class WidowXLeaderTeleop(Teleoperator):
         pass
 
     def configure(self) -> None:
+        self.driver.set_all_modes(trossen_arm.Mode.position)
+        # Move the arm to the staged positions
+        self.driver.set_all_positions(
+            self.config.staged_positions,
+            goal_time=2.0,
+            blocking=True,
+        )
 
-        if (self.config.model == WidowXLeaderModel.GLIDE_LEFT
-            or self.config.model == WidowXLeaderModel.GLIDE_RIGHT):
-            self.driver.set_all_modes(trossen_arm.Mode.effort)
-            self.driver.set_gripper_effort(
-                self.config.glide_trigger_effort,
-                goal_time=0.0,
-                blocking=True
-            )
-        else:
-            self.driver.set_all_modes(trossen_arm.Mode.position)
-            # Move the arm to the staged positions
-            self.driver.set_all_positions(
-                self.config.staged_positions,
-                goal_time=2.0,
-                blocking=True,
-            )
-
-            self.driver.set_all_modes(trossen_arm.Mode.external_effort)
-            # Set all external efforts to 0.0 to enable gravity compensation
-            self.driver.set_all_external_efforts(
-                [0.0] * len(self.config.joint_names),
-                goal_time=0.0,
-                blocking=True,
-            )
+        self.driver.set_all_modes(trossen_arm.Mode.external_effort)
+        # Set all external efforts to 0.0 to enable gravity compensation
+        self.driver.set_all_external_efforts(
+            [0.0] * len(self.config.joint_names),
+            goal_time=0.0,
+            blocking=True,
+        )
 
     def get_action(self) -> dict[str, float]:
         start = time.perf_counter()
@@ -158,3 +115,24 @@ class WidowXLeaderTeleop(Teleoperator):
 
         self.driver.cleanup()
         logger.info(f"{self} disconnected.")
+
+    @abc.abstractmethod
+    def _configure_driver(self) -> None:
+        # Hook for subclasses to configure the driver with the correct model/end-effector
+        pass
+
+class WidowXCoreLeaderTeleop(WidowXLeaderTeleop):
+    """
+    [WidowX](https://www.trossenrobotics.com/widowx) by Trossen Robotics
+    """
+
+    config_class = WidowXCoreLeaderTeleopConfig
+    name = "widowxcore_leader_teleop"
+
+    def _configure_driver(self) -> None:
+        self.driver.configure(
+            model=trossen_arm.Model.core,
+            end_effector=trossen_arm.StandardEndEffector.core_leader,
+            serv_ip=self.config.ip_address,
+            clear_error=True,
+        )

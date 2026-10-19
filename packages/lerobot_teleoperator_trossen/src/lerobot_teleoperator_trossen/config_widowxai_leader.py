@@ -3,25 +3,12 @@ from dataclasses import dataclass, field
 import numpy as np
 from lerobot.teleoperators.config import TeleoperatorConfig
 
+from lerobot_teleoperator_trossen.config_widowx_leader import WidowXLeaderTeleopConfig
 
 @TeleoperatorConfig.register_subclass("widowxai_leader_teleop")
 @dataclass
-class WidowXAILeaderTeleopConfig(TeleoperatorConfig):
-    # IP address of the arm
-    ip_address: str
-
-    # Joint names for the WidowX AI leader arm
-    joint_names: list[str] = field(
-        default_factory=lambda: [
-            "joint_0",
-            "joint_1",
-            "joint_2",
-            "joint_3",
-            "joint_4",
-            "joint_5",
-            "left_carriage_joint",
-        ]
-    )
+class WidowXAILeaderTeleopConfig(WidowXLeaderTeleopConfig):
+    # All other configuration is in WidowXLeaderTeleopConfig
 
     # "Staged" positions in rad for the arm and m for the gripper
     #
