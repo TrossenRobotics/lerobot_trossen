@@ -6,11 +6,16 @@ from lerobot.cameras.utils import make_cameras_from_configs
 from lerobot.robots.robot import Robot
 
 from lerobot_robot_trossen.config_bi_widowx_follower import (
-    BiWidowXFollowerRobotConfig, BiWidowXCoreFollowerRobotConfig, BiWidowXHeavyFollowerRobotConfig,
+    BiWidowXFollowerRobotConfig,
+    BiWidowXCoreFollowerRobotConfig,
+    BiWidowXHeavyFollowerRobotConfig,
     BiWidowXProFollowerRobotConfig,
 )
 from lerobot_robot_trossen.widowx_follower import (
-    WidowXFollower, WidowXCoreFollower, WidowXHeavyFollower, WidowXProFollower,
+    WidowXFollower,
+    WidowXCoreFollower,
+    WidowXHeavyFollower,
+    WidowXProFollower,
 )
 
 logger = logging.getLogger(__name__)
@@ -140,10 +145,14 @@ class BiWidowXFollowerRobot(Robot):
     def send_action(self, action: dict[str, Any]) -> dict[str, Any]:
         # Route each key to the arm whose joint names it belongs to
         left_action = {
-            key: value for key, value in action.items() if key in self.left_arm.action_features
+            key: value
+            for key, value in action.items()
+            if key in self.left_arm.action_features
         }
         right_action = {
-            key: value for key, value in action.items() if key in self.right_arm.action_features
+            key: value
+            for key, value in action.items()
+            if key in self.right_arm.action_features
         }
 
         return {
@@ -161,7 +170,7 @@ class BiWidowXFollowerRobot(Robot):
 
 class BiWidowXCoreFollowerRobot(BiWidowXFollowerRobot):
     """
-    [Bimanual WidowX Core Follower Arms](https://www.trossenrobotics.com/workbench) by Trossen 
+    [Bimanual WidowX Core Follower Arms](https://www.trossenrobotics.com/workbench) by Trossen
     Robotics
     """
 
@@ -172,7 +181,7 @@ class BiWidowXCoreFollowerRobot(BiWidowXFollowerRobot):
 
 class BiWidowXProFollowerRobot(BiWidowXFollowerRobot):
     """
-    [Bimanual WidowX Pro Follower Arms](https://www.trossenrobotics.com/workbench) by Trossen 
+    [Bimanual WidowX Pro Follower Arms](https://www.trossenrobotics.com/workbench) by Trossen
     Robotics
     """
 

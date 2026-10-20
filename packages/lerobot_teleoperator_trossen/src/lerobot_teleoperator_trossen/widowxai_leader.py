@@ -1,6 +1,8 @@
 import trossen_arm
 
-from lerobot_teleoperator_trossen.config_widowxai_leader import WidowXAILeaderTeleopConfig
+from lerobot_teleoperator_trossen.config_widowxai_leader import (
+    WidowXAILeaderTeleopConfig,
+)
 from lerobot_teleoperator_trossen.widowx_leader import WidowXLeaderTeleop
 
 

@@ -3,7 +3,9 @@ from dataclasses import dataclass, field
 import numpy as np
 from lerobot.teleoperators.config import TeleoperatorConfig
 
-from lerobot_teleoperator_trossen.config_bi_widowx_leader import BiWidowXLeaderRobotConfig
+from lerobot_teleoperator_trossen.config_bi_widowx_leader import (
+    BiWidowXLeaderRobotConfig,
+)
 
 
 @TeleoperatorConfig.register_subclass("bi_widowxai_leader_teleop")

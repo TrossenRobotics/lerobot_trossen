@@ -37,4 +37,3 @@ class GlideLeftLeaderTeleopConfig(GlideLeaderTeleopConfig):
 class GlideRightLeaderTeleopConfig(GlideLeaderTeleopConfig):
     # All other configuration is in GlideLeaderTeleopConfig
     pass
-

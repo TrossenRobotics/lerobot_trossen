@@ -5,6 +5,7 @@ from lerobot.teleoperators.config import TeleoperatorConfig
 
 from lerobot_teleoperator_trossen.config_widowx_leader import WidowXLeaderTeleopConfig
 
+
 @TeleoperatorConfig.register_subclass("widowxai_leader_teleop")
 @dataclass
 class WidowXAILeaderTeleopConfig(WidowXLeaderTeleopConfig):

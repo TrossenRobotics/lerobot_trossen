@@ -10,11 +10,14 @@ from lerobot.robots.robot import Robot
 from lerobot.robots.utils import ensure_safe_goal_position
 
 from lerobot_robot_trossen.config_widowx_follower import (
-    WidowXFollowerConfig, WidowXCoreFollowerConfig,  WidowXHeavyFollowerConfig,
-    WidowXProFollowerConfig
+    WidowXFollowerConfig,
+    WidowXCoreFollowerConfig,
+    WidowXHeavyFollowerConfig,
+    WidowXProFollowerConfig,
 )
 
 logger = logging.getLogger(__name__)
+
 
 class WidowXFollower(Robot):
     """
@@ -270,6 +273,7 @@ class WidowXCoreFollower(WidowXFollower):
     """
     [WidowX Core](https://www.trossenrobotics.com/widowx) by Trossen Robotics
     """
+
     config_class = WidowXCoreFollowerConfig
     name = "widowxcore_follower_robot"
 
@@ -281,10 +285,12 @@ class WidowXCoreFollower(WidowXFollower):
             clear_error=True,
         )
 
+
 class WidowXProFollower(WidowXFollower):
     """
     [WidowX Pro](https://www.trossenrobotics.com/widowx) by Trossen Robotics
     """
+
     config_class = WidowXProFollowerConfig
     name = "widowxpro_follower_robot"
 
@@ -296,10 +302,12 @@ class WidowXProFollower(WidowXFollower):
             clear_error=True,
         )
 
+
 class WidowXHeavyFollower(WidowXFollower):
     """
     [WidowX Heavy](https://www.trossenrobotics.com/widowx) by Trossen Robotics
     """
+
     config_class = WidowXHeavyFollowerConfig
     name = "widowxheavy_follower_robot"
 

@@ -8,6 +8,7 @@ class WidowXAIFollower(WidowXFollower):
     """
     [WidowX AI](https://www.trossenrobotics.com/widowx-ai) by Trossen Robotics
     """
+
     config_class = WidowXAIFollowerConfig
     name = "widowxai_follower_robot"
 

@@ -5,6 +5,7 @@ from lerobot.robots.config import RobotConfig
 
 from lerobot_robot_trossen.config_widowx_follower import WidowXFollowerConfig
 
+
 @RobotConfig.register_subclass("widowxai_follower_robot")
 @dataclass
 class WidowXAIFollowerConfig(WidowXFollowerConfig):

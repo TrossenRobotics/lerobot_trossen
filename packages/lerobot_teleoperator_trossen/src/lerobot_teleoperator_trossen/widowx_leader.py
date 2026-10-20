@@ -7,7 +7,8 @@ from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnected
 from lerobot.teleoperators.teleoperator import Teleoperator
 
 from lerobot_teleoperator_trossen.config_widowx_leader import (
-    WidowXLeaderTeleopConfig, WidowXCoreLeaderTeleopConfig
+    WidowXLeaderTeleopConfig,
+    WidowXCoreLeaderTeleopConfig,
 )
 
 logger = logging.getLogger(__name__)
@@ -120,6 +121,7 @@ class WidowXLeaderTeleop(Teleoperator):
     def _configure_driver(self) -> None:
         # Hook for subclasses to configure the driver with the correct model/end-effector
         pass
+
 
 class WidowXCoreLeaderTeleop(WidowXLeaderTeleop):
     """

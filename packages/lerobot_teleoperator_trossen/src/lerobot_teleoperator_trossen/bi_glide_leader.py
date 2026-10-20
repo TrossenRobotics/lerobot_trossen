@@ -2,7 +2,10 @@ from lerobot.teleoperators.teleoperator import Teleoperator
 
 from lerobot_teleoperator_trossen.bi_widowx_leader import BiWidowXLeaderRobot
 from lerobot_teleoperator_trossen.config_bi_glide_leader import BiGlideLeaderRobotConfig
-from lerobot_teleoperator_trossen.glide_leader import GlideLeftLeaderTeleop, GlideRightLeaderTeleop
+from lerobot_teleoperator_trossen.glide_leader import (
+    GlideLeftLeaderTeleop,
+    GlideRightLeaderTeleop,
+)
 
 
 class BiGlideLeaderRobot(BiWidowXLeaderRobot):

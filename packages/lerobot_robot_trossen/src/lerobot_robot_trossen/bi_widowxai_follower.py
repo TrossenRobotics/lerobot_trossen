@@ -1,5 +1,7 @@
 from lerobot_robot_trossen.bi_widowx_follower import BiWidowXFollowerRobot
-from lerobot_robot_trossen.config_bi_widowxai_follower import BiWidowXAIFollowerRobotConfig
+from lerobot_robot_trossen.config_bi_widowxai_follower import (
+    BiWidowXAIFollowerRobotConfig,
+)
 from lerobot_robot_trossen.widowxai_follower import WidowXAIFollower
 
 
