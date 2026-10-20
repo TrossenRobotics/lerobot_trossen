@@ -11,3 +11,5 @@ from .config_widowxai_leader import WidowXAILeaderTeleopConfig
 from .widowxai_leader import WidowXAILeaderTeleop
 from .mobileai_leader import MobileAILeaderTeleop
 from .config_mobileai_leader import MobileAILeaderTeleopConfig
+from .config_rivet_leader import RivetGlideLeaderTeleopConfig
+from .rivet_leader import RivetGlideLeaderTeleop
