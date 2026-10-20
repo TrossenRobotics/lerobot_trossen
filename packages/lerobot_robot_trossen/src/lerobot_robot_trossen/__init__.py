@@ -14,3 +14,5 @@ from .config_widowx_follower import (
 from .widowxai_follower import WidowXAIFollower
 from .mobileai import MobileAIRobot
 from .config_mobileai import MobileAIRobotConfig
+from .config_rivet import RivetCoreRobotConfig, RivetProRobotConfig
+from .rivet import RivetCoreRobot, RivetProRobot
