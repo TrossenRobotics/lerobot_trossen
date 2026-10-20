@@ -49,8 +49,8 @@ class RivetGlideLeaderTeleop(BiGlideLeaderRobot):
     def get_action(self) -> dict[str, float]:
         action = super().get_action()
 
-        left_input = self.left_arm.get_input_report()
-        right_input = self.right_arm.get_input_report()
+        left_input = self.left_arm.driver.get_input_report()
+        right_input = self.right_arm.driver.get_input_report()
         right_up_btn = bool(right_input.buttons & (1 << 0))
         right_down_btn = bool(right_input.buttons & (1 << 2))
 
