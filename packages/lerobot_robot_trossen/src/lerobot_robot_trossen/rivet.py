@@ -55,7 +55,7 @@ class RivetRobot(Robot):
 
     @property
     def _base_ft(self) -> dict[str, type]:
-        return {"x.vel": float, "y.vel": float, "theta.vel": float}
+        return {"x.vel": float, "y.vel": float, "theta.vel": float, "lift.vel": float}
 
     @property
     def _cameras_ft(self) -> dict[str, tuple]:
@@ -80,7 +80,7 @@ class RivetRobot(Robot):
 
     @property
     def is_connected(self) -> bool:
-        return self.base_driver.is_configured() and self.arms.is_connected and all(
+        return self.base.is_configured() and self.arms.is_connected and all(
             cam.is_connected for cam in self.cameras.values()
         )
 
@@ -118,7 +118,9 @@ class RivetRobot(Robot):
 
         # Get base observations
         velocity = self.base.get_odometry().velocity
-        obs_dict.update({"x.vel": velocity[0], "y.vel": velocity[1], "theta.vel": velocity[2]})
+        lift_velocity = self.base.get_lift_state().velocity
+        obs_dict.update({"x.vel": velocity[0], "y.vel": velocity[1], "theta.vel": velocity[2],
+                         "lift.vel": lift_velocity})
 
 
         # read_latest*() is a non-blocking peek of the latest frame; depth cameras also yield "<cam>_depth".
@@ -145,13 +147,15 @@ class RivetRobot(Robot):
         action_base_x_vel = action.get("x.vel", 0.0)
         action_base_y_vel = action.get("y.vel", 0.0)
         action_base_theta_vel = action.get("theta.vel", 0.0)
+        action_base_lift_vel = action.get("lift.vel", 0.0)
         self.base.set_velocities([action_base_x_vel, action_base_y_vel, action_base_theta_vel])
-
+        self.base.set_lift_velocity(action_base_lift_vel)
         return {
             **send_action_arms,
             "x.vel": action_base_x_vel,
             "y.vel": action_base_y_vel,
             "theta.vel": action_base_theta_vel,
+            "lift.vel": action_base_lift_vel,
         }
 
     def disconnect(self):
