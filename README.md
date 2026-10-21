@@ -2,7 +2,7 @@
 
 ## Overview
 
-This package contains LeRobot integrations for Trossen Robotics arms: the WidowX Core, Pro, Heavy, and AI followers, the GLIDE and WidowX Core leaders, and the Mobile AI robots.
+This package contains LeRobot integrations for Trossen Robotics arms: the WidowX Core, Pro, Heavy, and AI followers, the Glide and WidowX Core leaders, and the Mobile AI robots.
 See the [LeRobot documentation](https://huggingface.co/docs/lerobot) for details on more advanced usage like using the HuggingFace Hub, model training, and using different teleoperation methods.
 See the [Trossen AI documentation](https://docs.trossenrobotics.com/trossen_arm/main/tutorials/lerobot_plugin.html) for details on configuration and usage of Trossen robots with LeRobot.
 
@@ -55,7 +55,7 @@ All other arguments stay the same.
 
 | Arm | Single arm | Bimanual |
 | --- | ---------- | -------- |
-| GLIDE | `glideleft_leader_teleop` or `glideright_leader_teleop` | `bi_glide_leader_teleop` |
+| Glide | `glideleft_leader_teleop` or `glideright_leader_teleop` | `bi_glide_leader_teleop` |
 | WidowX Core | `widowxcore_leader_teleop` | `bi_widowxcore_leader_teleop` |
 | WidowX AI | `widowxai_leader_teleop` | `bi_widowxai_leader_teleop` |
 | Mobile AI | — | `mobileai_leader_teleop` |

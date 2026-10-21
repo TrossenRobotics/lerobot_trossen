@@ -21,7 +21,7 @@ class GlideLeaderTeleopConfig(TeleoperatorConfig):
         ]
     )
 
-    # The effort that the GLIDE trigger maintains against the finger.
+    # The effort that the Glide trigger maintains against the finger.
     glide_trigger_effort: float = 6.5
 
 

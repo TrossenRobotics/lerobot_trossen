@@ -34,6 +34,6 @@ class BiGlideLeaderRobotConfig(TeleoperatorConfig):
         ]
     )
 
-    # The effort that each GLIDE trigger maintains against the finger.
+    # The effort that each Glide trigger maintains against the finger.
     left_arm_glide_trigger_effort: float = 6.5
     right_arm_glide_trigger_effort: float = 6.5
