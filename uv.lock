@@ -1,14 +1,28 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = "==3.12.*"
 resolution-markers = [
-    "(platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')",
-    "(platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'arm64' and sys_platform == 'linux')",
-    "platform_machine != 'AMD64' and platform_machine != 'aarch64' and platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'linux'",
-    "platform_machine == 'arm64' and sys_platform == 'darwin'",
-    "sys_platform == 'win32'",
-    "(platform_machine != 'arm64' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux' and sys_platform != 'win32')",
+    "platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5'",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5'",
+    "(platform_machine == 'arm64' and sys_platform == 'darwin' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine == 'AMD64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5')",
+    "sys_platform == 'win32' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5'",
+    "platform_machine == 'arm64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5'",
+    "(platform_machine != 'AMD64' and platform_machine != 'aarch64' and platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine != 'arm64' and sys_platform == 'darwin' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5') or (sys_platform != 'darwin' and sys_platform != 'linux' and sys_platform != 'win32' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5')",
+    "platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5'",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5'",
+    "(platform_machine == 'arm64' and sys_platform == 'darwin' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine == 'AMD64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5')",
+    "sys_platform == 'win32' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5'",
+    "platform_machine == 'arm64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5'",
+    "(platform_machine != 'AMD64' and platform_machine != 'aarch64' and platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine != 'arm64' and sys_platform == 'darwin' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (sys_platform != 'darwin' and sys_platform != 'linux' and sys_platform != 'win32' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5')",
+    "(platform_machine == 'arm64' and sys_platform == 'darwin' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine == 'AMD64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5')",
+    "sys_platform == 'win32' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5'",
+    "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine == 'arm64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5')",
+    "(platform_machine != 'AMD64' and platform_machine != 'aarch64' and platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine != 'arm64' and sys_platform == 'darwin' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (sys_platform != 'darwin' and sys_platform != 'linux' and sys_platform != 'win32' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5')",
 ]
+conflicts = [[
+    { package = "lerobot-trossen", extra = "zed-5-4" },
+    { package = "lerobot-trossen", extra = "zed-5-5" },
+]]
 
 [manifest]
 members = [
@@ -207,6 +221,28 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/d8/53/6f443c9a4a8358a93a6792e2acffb9d9d5cb0a5cfd8802644b7b1c9a02e4/colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44", size = 27697, upload-time = "2022-10-25T02:36:22.414Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6", size = 25335, upload-time = "2022-10-25T02:36:20.889Z" },
+]
+
+[[package]]
+name = "cython"
+version = "3.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a9/d8/4981ef716ad0e3ff0d3ef383aefc6b03c4a88dee33b272bf8e0d833001ca/cython-3.3.0.tar.gz", hash = "sha256:eed0d93fbca7087f143b42c34b05a825849bdf17f101572c2105acfa49aa88b8", size = 3727515, upload-time = "2026-08-22T05:16:39.493Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/da/0f/95bad838a80ac52c9e982dad00bd9a0b2bad57fb4c688e5f53ac3ef65ff0/cython-3.3.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:03bc5333932f5dda3ba9315298ecdd21daa1b58410bb1f8ce04c78ec8337130a", size = 3143472, upload-time = "2026-08-22T05:17:07.956Z" },
+    { url = "https://files.pythonhosted.org/packages/91/8b/53d4a84de853b39940a0e35a6a2a9ed5f54cb05468daee95bc0fd1c2a178/cython-3.3.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:7e321ae700995a16dc3055ada06ffb8d61e1a7434e5d0e811547a45ac1015ebd", size = 3258974, upload-time = "2026-08-22T05:17:09.908Z" },
+    { url = "https://files.pythonhosted.org/packages/6a/4e/6b1c5a4e6bbe1726104de007aa2fdf01a3e2e386b4ec93c7be5f5085d53f/cython-3.3.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:428fafed98ea26927000a287b4dfc9ef07339f56656a5329a34eaa593f79a4f8", size = 3412225, upload-time = "2026-08-22T05:17:12.281Z" },
+    { url = "https://files.pythonhosted.org/packages/f4/9b/cd724d91c500116769bdb853450a2197ba3d640dbbe3b02fc54ebdfdbd1b/cython-3.3.0-cp312-cp312-win_amd64.whl", hash = "sha256:333449cc0350baedee5a6af27929eac8a71eac4ec59333c45ff476b33c6c660d", size = 2872123, upload-time = "2026-08-22T05:17:14.322Z" },
+    { url = "https://files.pythonhosted.org/packages/14/59/bc1a84b434cb5bebb0cd6f50da8f239d35a5c141b20fdeafc2817fd87778/cython-3.3.0-cp39-abi3-macosx_10_9_x86_64.whl", hash = "sha256:e0d2713d2b292c826bc21dc8732bd9e47628103aa3764180c881e04b3fef95dc", size = 3063660, upload-time = "2026-08-22T05:17:40.923Z" },
+    { url = "https://files.pythonhosted.org/packages/ba/6d/542e32908fb421d88354f327ed6450e14240f9825d25393065bc65f4723f/cython-3.3.0-cp39-abi3-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:169e56fd411f4cd5bba51c82f8239421d547a846099db2b261e4aed48ba9f51f", size = 3358395, upload-time = "2026-08-22T05:17:43.036Z" },
+    { url = "https://files.pythonhosted.org/packages/9c/7c/ddaf197bc65b581e1891657940bc4f7cb1f740e822115e828920b3a119ce/cython-3.3.0-cp39-abi3-manylinux2014_armv7l.manylinux_2_17_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:29f38ebafdf23e3da2516f40c4d065da38bfe002181bf93e2b8cf1262449aba6", size = 3041760, upload-time = "2026-08-22T05:17:44.907Z" },
+    { url = "https://files.pythonhosted.org/packages/19/a7/ae5ec3e34d43da846ed4c425734752d83aae0dae49feb929f09c90fc9afa/cython-3.3.0-cp39-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:75c4ae8a6d3a5ccf3cdaba8ab32e6a8d0cd38e3a476aa7ac12df8f8171a8d570", size = 3156152, upload-time = "2026-08-22T05:17:46.884Z" },
+    { url = "https://files.pythonhosted.org/packages/31/44/c60b601fc43f0b08e9d6f14b94e0dd02eb0ca8d60f46e242ace7191ac1be/cython-3.3.0-cp39-abi3-musllinux_1_2_armv7l.whl", hash = "sha256:b94fb5613b9fe34c27d13ec9972dc0dcd2a2155db2902e93921cadc162610a38", size = 3046690, upload-time = "2026-08-22T05:17:48.731Z" },
+    { url = "https://files.pythonhosted.org/packages/b0/9e/d735c26ed907563d3365534006acb263651c2d3b87fee804f7a483dd1714/cython-3.3.0-cp39-abi3-musllinux_1_2_i686.whl", hash = "sha256:c4558ba85849ab65dc57e10fd0efb13fabd9d3c09981a2566e18dec7cf47586a", size = 3373534, upload-time = "2026-08-22T05:17:50.7Z" },
+    { url = "https://files.pythonhosted.org/packages/e0/e8/aa7b4f3a28d6e8117c76e2cf78a0df7a503486cdf7243c5b53200c9533a1/cython-3.3.0-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:311a016369adfd1e0015c4f9819168fc0e518451d7efb4435c30d65a3a26d52b", size = 3265110, upload-time = "2026-08-22T05:17:52.577Z" },
+    { url = "https://files.pythonhosted.org/packages/9c/66/37892a8999d6bbd3f92d691a9701cb720c8ddd6171e16f5148eee6e8cb7f/cython-3.3.0-cp39-abi3-win32.whl", hash = "sha256:90869072e50b7c8904fe1dd7810321ae901fd5637a6eec6646ed9c57f9eb1081", size = 2587733, upload-time = "2026-08-22T05:17:54.547Z" },
+    { url = "https://files.pythonhosted.org/packages/19/a2/5f4d305cbd4489d21570e5491ad5c483c478cdab032853e2125c280e3bd5/cython-3.3.0-cp39-abi3-win_arm64.whl", hash = "sha256:dce56c26d388f00a19426371b6926bf2f77c5c03b71d5273e4556c68be98c2dd", size = 2608078, upload-time = "2026-08-22T05:17:56.386Z" },
+    { url = "https://files.pythonhosted.org/packages/bf/77/67b0b24e45073a699610e50f00c18474ff9b09ea29ecc95083bdf5e60acd/cython-3.3.0-py3-none-any.whl", hash = "sha256:9b24b5c8cd536946b62086fcafee6d5509d3f549f72d553d2336af87ffbe0da1", size = 1349151, upload-time = "2026-08-22T05:16:36.741Z" },
 ]
 
 [[package]]
@@ -533,6 +569,14 @@ intelrealsense = [
 ]
 
 [[package]]
+name = "lerobot-camera-zed"
+version = "0.1.0"
+source = { git = "https://github.com/stereolabs/lerobot_camera_zed#c5fc6f59033630f8425cb96f96e140618317cc20" }
+dependencies = [
+    { name = "lerobot" },
+]
+
+[[package]]
 name = "lerobot-robot-trossen"
 version = "0.1.0"
 source = { editable = "packages/lerobot_robot_trossen" }
@@ -585,15 +629,41 @@ dependencies = [
 realsense = [
     { name = "lerobot-robot-trossen", extra = ["realsense"] },
 ]
+zed-5-4 = [
+    { name = "lerobot-camera-zed" },
+    { name = "pyzed", version = "5.4", source = { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_aarch64/pyzed-5.4-cp312-cp312-linux_aarch64.whl" }, marker = "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-4') or (extra == 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5')" },
+    { name = "pyzed", version = "5.4", source = { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_x86_64/pyzed-5.4-cp312-cp312-linux_x86_64.whl" }, marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-4') or (extra == 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5')" },
+]
+zed-5-5 = [
+    { name = "lerobot-camera-zed" },
+    { name = "pyzed", version = "5.5", source = { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_aarch64/pyzed-5.5-cp312-cp312-linux_aarch64.whl" }, marker = "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-5') or (extra == 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5')" },
+    { name = "pyzed", version = "5.5", source = { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_x86_64/pyzed-5.5-cp312-cp312-linux_x86_64.whl" }, marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-5') or (extra == 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5')" },
+]
 
 [package.metadata]
 requires-dist = [
+    { name = "lerobot-camera-zed", marker = "extra == 'zed-5-4'", git = "https://github.com/stereolabs/lerobot_camera_zed" },
+    { name = "lerobot-camera-zed", marker = "extra == 'zed-5-5'", git = "https://github.com/stereolabs/lerobot_camera_zed" },
     { name = "lerobot-robot-trossen", editable = "packages/lerobot_robot_trossen" },
     { name = "lerobot-robot-trossen", extras = ["realsense"], marker = "extra == 'realsense'", editable = "packages/lerobot_robot_trossen" },
     { name = "lerobot-teleoperator-trossen", editable = "packages/lerobot_teleoperator_trossen" },
+    { name = "pyzed", marker = "python_full_version == '3.12.*' and platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'zed-5-4'", url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_aarch64/pyzed-5.4-cp312-cp312-linux_aarch64.whl" },
+    { name = "pyzed", marker = "python_full_version == '3.12.*' and platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'zed-5-5'", url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_aarch64/pyzed-5.5-cp312-cp312-linux_aarch64.whl" },
+    { name = "pyzed", marker = "(python_full_version < '3.12' and platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'zed-5-4') or (python_full_version < '3.12' and platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'zed-5-4')" },
+    { name = "pyzed", marker = "(python_full_version < '3.12' and platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'zed-5-5') or (python_full_version < '3.12' and platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'zed-5-5')" },
+    { name = "pyzed", marker = "python_full_version == '3.13.*' and platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'zed-5-4'", url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_aarch64/pyzed-5.4-cp313-cp313-linux_aarch64.whl" },
+    { name = "pyzed", marker = "python_full_version == '3.13.*' and platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'zed-5-5'", url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_aarch64/pyzed-5.5-cp313-cp313-linux_aarch64.whl" },
+    { name = "pyzed", marker = "python_full_version == '3.14.*' and platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'zed-5-4'", url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_aarch64/pyzed-5.4-cp314-cp314-linux_aarch64.whl" },
+    { name = "pyzed", marker = "python_full_version == '3.14.*' and platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'zed-5-5'", url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_aarch64/pyzed-5.5-cp314-cp314-linux_aarch64.whl" },
+    { name = "pyzed", marker = "python_full_version == '3.12.*' and platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'zed-5-4'", url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_x86_64/pyzed-5.4-cp312-cp312-linux_x86_64.whl" },
+    { name = "pyzed", marker = "python_full_version == '3.12.*' and platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'zed-5-5'", url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_x86_64/pyzed-5.5-cp312-cp312-linux_x86_64.whl" },
+    { name = "pyzed", marker = "python_full_version == '3.13.*' and platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'zed-5-4'", url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_x86_64/pyzed-5.4-cp313-cp313-linux_x86_64.whl" },
+    { name = "pyzed", marker = "python_full_version == '3.13.*' and platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'zed-5-5'", url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_x86_64/pyzed-5.5-cp313-cp313-linux_x86_64.whl" },
+    { name = "pyzed", marker = "python_full_version == '3.14.*' and platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'zed-5-4'", url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_x86_64/pyzed-5.4-cp314-cp314-linux_x86_64.whl" },
+    { name = "pyzed", marker = "python_full_version == '3.14.*' and platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'zed-5-5'", url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_x86_64/pyzed-5.5-cp314-cp314-linux_x86_64.whl" },
     { name = "trossen-slate", marker = "sys_platform == 'linux'", specifier = ">=0.0.3" },
 ]
-provides-extras = ["realsense"]
+provides-extras = ["realsense", "zed-5-4", "zed-5-5"]
 
 [[package]]
 name = "markdown-it-py"
@@ -771,7 +841,7 @@ name = "nvidia-cudnn-cu12"
 version = "9.5.1.17"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-cublas-cu12", marker = "(platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')" },
+    { name = "nvidia-cublas-cu12" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/2a/78/4535c9c7f859a64781e43c969a3a7e84c54634e319a996d43ef32ce46f83/nvidia_cudnn_cu12-9.5.1.17-py3-none-manylinux_2_28_x86_64.whl", hash = "sha256:30ac3869f6db17d170e0e556dd6cc5eee02647abc31ca856634d5a40f82c15b2", size = 570988386, upload-time = "2024-10-25T19:54:26.39Z" },
@@ -782,7 +852,7 @@ name = "nvidia-cufft-cu12"
 version = "11.3.0.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')" },
+    { name = "nvidia-nvjitlink-cu12" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8f/16/73727675941ab8e6ffd86ca3a4b7b47065edcca7a997920b831f8147c99d/nvidia_cufft_cu12-11.3.0.4-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:ccba62eb9cef5559abd5e0d54ceed2d9934030f51163df018532142a8ec533e5", size = 200221632, upload-time = "2024-11-20T17:41:32.357Z" },
@@ -811,9 +881,9 @@ name = "nvidia-cusolver-cu12"
 version = "11.7.1.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-cublas-cu12", marker = "(platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')" },
-    { name = "nvidia-cusparse-cu12", marker = "(platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')" },
-    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')" },
+    { name = "nvidia-cublas-cu12" },
+    { name = "nvidia-cusparse-cu12" },
+    { name = "nvidia-nvjitlink-cu12" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f0/6e/c2cf12c9ff8b872e92b4a5740701e51ff17689c4d726fca91875b07f655d/nvidia_cusolver_cu12-11.7.1.2-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:e9e49843a7707e42022babb9bcfa33c29857a93b88020c4e4434656a655b698c", size = 158229790, upload-time = "2024-11-20T17:43:43.211Z" },
@@ -825,7 +895,7 @@ name = "nvidia-cusparse-cu12"
 version = "12.5.4.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')" },
+    { name = "nvidia-nvjitlink-cu12" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/06/1e/b8b7c2f4099a37b96af5c9bb158632ea9e5d9d27d7391d7eb8fc45236674/nvidia_cusparse_cu12-12.5.4.2-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:7556d9eca156e18184b94947ade0fba5bb47d69cec46bf8660fd2c71a4b48b73", size = 216561367, upload-time = "2024-11-20T17:44:54.824Z" },
@@ -1018,10 +1088,10 @@ name = "pyobjc-framework-applicationservices"
 version = "12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pyobjc-core", marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
-    { name = "pyobjc-framework-cocoa", marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
-    { name = "pyobjc-framework-coretext", marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
-    { name = "pyobjc-framework-quartz", marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
+    { name = "pyobjc-core" },
+    { name = "pyobjc-framework-cocoa" },
+    { name = "pyobjc-framework-coretext" },
+    { name = "pyobjc-framework-quartz" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/8c/79/0b7a00bcc7561c816281382c933a46aa7a90acca48b942054b7d32d0caf7/pyobjc_framework_applicationservices-12.0.tar.gz", hash = "sha256:eabbf6c57573158714aa656e5d0112330a87692db336aae7e94e216db89e93be", size = 103595, upload-time = "2025-10-21T08:26:32.651Z" }
 wheels = [
@@ -1033,7 +1103,7 @@ name = "pyobjc-framework-cocoa"
 version = "12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pyobjc-core", marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
+    { name = "pyobjc-core" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/37/6f/89837da349fe7de6476c426f118096b147de923139556d98af1832c64b97/pyobjc_framework_cocoa-12.0.tar.gz", hash = "sha256:02d69305b698015a20fcc8e1296e1528e413d8cf9fdcd590478d359386d76e8a", size = 2771906, upload-time = "2025-10-21T08:30:51.765Z" }
 wheels = [
@@ -1045,9 +1115,9 @@ name = "pyobjc-framework-coretext"
 version = "12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pyobjc-core", marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
-    { name = "pyobjc-framework-cocoa", marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
-    { name = "pyobjc-framework-quartz", marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
+    { name = "pyobjc-core" },
+    { name = "pyobjc-framework-cocoa" },
+    { name = "pyobjc-framework-quartz" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b1/36/32ec183e555b73152d7813f6f7c277fd018440f70a1f142bd75b04946089/pyobjc_framework_coretext-12.0.tar.gz", hash = "sha256:8cc0c7dd2b7e68ad1c760784e422722550c77cbdbd60eb455170ec444ca1cfd2", size = 90546, upload-time = "2025-10-21T08:32:31.291Z" }
 wheels = [
@@ -1059,8 +1129,8 @@ name = "pyobjc-framework-quartz"
 version = "12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pyobjc-core", marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
-    { name = "pyobjc-framework-cocoa", marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
+    { name = "pyobjc-core" },
+    { name = "pyobjc-framework-cocoa" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/91/0b/3c34fc9de790daff5ca49d1f36cb8dcc353ac10e4e29b4759e397a3831f4/pyobjc_framework_quartz-12.0.tar.gz", hash = "sha256:5bcb9e78d671447e04d89e2e3c39f3135157892243facc5f8468aa333e40d67f", size = 3159509, upload-time = "2025-10-21T08:40:01.918Z" }
 wheels = [
@@ -1155,6 +1225,102 @@ sdist = { url = "https://files.pythonhosted.org/packages/7f/be/2d07ad85e3d593d69
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d5/ca/6a2cc3a73170d10b5af1f1613baa2ed1f8f46f62dd0bfab2bffd2c2fe260/pyyaml_include-1.4.1-py3-none-any.whl", hash = "sha256:323c7f3a19c82fbc4d73abbaab7ef4f793e146a13383866831631b26ccc7fb00", size = 19079, upload-time = "2024-03-25T14:56:41.274Z" },
 ]
+
+[[package]]
+name = "pyzed"
+version = "5.4"
+source = { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_aarch64/pyzed-5.4-cp312-cp312-linux_aarch64.whl" }
+resolution-markers = [
+    "platform_machine == 'aarch64' and sys_platform == 'linux'",
+]
+dependencies = [
+    { name = "cython", marker = "platform_machine == 'aarch64' and sys_platform == 'linux'" },
+    { name = "numpy", marker = "platform_machine == 'aarch64' and sys_platform == 'linux'" },
+]
+wheels = [
+    { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_aarch64/pyzed-5.4-cp312-cp312-linux_aarch64.whl", hash = "sha256:9b13a2d9097328e8a4d0fe2fdf03c82b6ea8be095235e6e7eee8e996fd4aa301" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cython", specifier = ">=3.0.0" },
+    { name = "numpy", specifier = ">=2.0,<3.0" },
+    { name = "opencv-python", marker = "extra == 'sample'" },
+    { name = "pyopengl", marker = "extra == 'sample'" },
+]
+provides-extras = ["sample"]
+
+[[package]]
+name = "pyzed"
+version = "5.4"
+source = { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_x86_64/pyzed-5.4-cp312-cp312-linux_x86_64.whl" }
+resolution-markers = [
+    "platform_machine == 'x86_64' and sys_platform == 'linux'",
+]
+dependencies = [
+    { name = "cython", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "numpy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+]
+wheels = [
+    { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_x86_64/pyzed-5.4-cp312-cp312-linux_x86_64.whl", hash = "sha256:554363fcaa76fc307c180cd1da386ce4a48bdf4200bd83827ef5a5404b8255e1" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cython", specifier = ">=3.0.0" },
+    { name = "numpy", specifier = ">=2.0,<3.0" },
+    { name = "opencv-python", marker = "extra == 'sample'" },
+    { name = "pyopengl", marker = "extra == 'sample'" },
+]
+provides-extras = ["sample"]
+
+[[package]]
+name = "pyzed"
+version = "5.5"
+source = { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_aarch64/pyzed-5.5-cp312-cp312-linux_aarch64.whl" }
+resolution-markers = [
+    "platform_machine == 'aarch64' and sys_platform == 'linux'",
+]
+dependencies = [
+    { name = "cython", marker = "platform_machine == 'aarch64' and sys_platform == 'linux'" },
+    { name = "numpy", marker = "platform_machine == 'aarch64' and sys_platform == 'linux'" },
+]
+wheels = [
+    { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_aarch64/pyzed-5.5-cp312-cp312-linux_aarch64.whl", hash = "sha256:33cc5d84b59860659dd93b08214e04e4f8d91b6dc319f65b451e74c43ee8c42f" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cython", specifier = ">=3.0.0" },
+    { name = "numpy", specifier = ">=2.0,<3.0" },
+    { name = "opencv-python", marker = "extra == 'sample'" },
+    { name = "pyopengl", marker = "extra == 'sample'" },
+]
+provides-extras = ["sample"]
+
+[[package]]
+name = "pyzed"
+version = "5.5"
+source = { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_x86_64/pyzed-5.5-cp312-cp312-linux_x86_64.whl" }
+resolution-markers = [
+    "platform_machine == 'x86_64' and sys_platform == 'linux'",
+]
+dependencies = [
+    { name = "cython", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "numpy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+]
+wheels = [
+    { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_x86_64/pyzed-5.5-cp312-cp312-linux_x86_64.whl", hash = "sha256:caca5e62be91271a17aeccb86d177a963af1a73f6554e92ff83171bda740742c" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cython", specifier = ">=3.0.0" },
+    { name = "numpy", specifier = ">=2.0,<3.0" },
+    { name = "opencv-python", marker = "extra == 'sample'" },
+    { name = "pyopengl", marker = "extra == 'sample'" },
+]
+provides-extras = ["sample"]
 
 [[package]]
 name = "requests"
@@ -1322,8 +1488,11 @@ name = "torchcodec"
 version = "0.5"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
-    "(platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')",
-    "platform_machine == 'arm64' and sys_platform == 'darwin'",
+    "platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5'",
+    "(platform_machine == 'arm64' and sys_platform == 'darwin' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine == 'AMD64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5')",
+    "platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5'",
+    "(platform_machine == 'arm64' and sys_platform == 'darwin' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine == 'AMD64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5')",
+    "(platform_machine == 'arm64' and sys_platform == 'darwin' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine == 'AMD64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5')",
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/02/52/23145c2a6580f0753104f257067db0cf68e1ba105408777ec54ce686c1f0/torchcodec-0.5-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:221c1123eefe31d57a41fe85b020306f685b6823dc70c3f4648215038fbae52c", size = 3493067, upload-time = "2025-07-23T17:43:54.519Z" },
@@ -1335,8 +1504,14 @@ name = "torchcodec"
 version = "0.11.1"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
-    "(platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'arm64' and sys_platform == 'linux')",
-    "sys_platform == 'win32'",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5'",
+    "sys_platform == 'win32' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5'",
+    "platform_machine == 'arm64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra == 'extra-15-lerobot-trossen-zed-5-5'",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5'",
+    "sys_platform == 'win32' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5'",
+    "platform_machine == 'arm64' and sys_platform == 'linux' and extra == 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5'",
+    "sys_platform == 'win32' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5'",
+    "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5') or (platform_machine == 'arm64' and sys_platform == 'linux' and extra != 'extra-15-lerobot-trossen-zed-5-4' and extra != 'extra-15-lerobot-trossen-zed-5-5')",
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/4b/85/3b41034b0f1289423745f918ace2a1e1e86b9c578c2e2461b6afcbb5354a/torchcodec-0.11.1-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:f1aee486a84247fcaa67870ac5005aa8d382a9839e91e476fa71b5b3d9fda9b7", size = 2397532, upload-time = "2026-04-14T18:24:53.368Z" },
@@ -1376,7 +1551,7 @@ name = "triton"
 version = "3.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "setuptools", marker = "(platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')" },
+    { name = "setuptools" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/24/5f/950fb373bf9c01ad4eb5a8cd5eaf32cdf9e238c02f9293557a2129b9c4ac/triton-3.3.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9999e83aba21e1a78c1f36f21bce621b77bcaa530277a50484a7cb4a822f6e43", size = 155669138, upload-time = "2025-05-29T23:39:51.771Z" },
