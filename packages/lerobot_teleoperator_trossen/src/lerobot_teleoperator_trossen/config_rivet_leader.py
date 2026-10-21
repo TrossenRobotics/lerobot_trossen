@@ -10,7 +10,6 @@ from lerobot_teleoperator_trossen.config_bi_glide_leader import (
 @TeleoperatorConfig.register_subclass("bi_rivet_glide_leader_teleop")
 @dataclass
 class RivetGlideLeaderTeleopConfig(BiGlideLeaderRobotConfig):
-
     # Maximum linear velocity that can be commanded (meters/second).
     max_linear_velocity: float = 0.8
 
