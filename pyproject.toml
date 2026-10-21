@@ -12,9 +12,34 @@ dependencies = [
   "trossen-slate>=0.0.3; sys_platform == 'linux'",
 ]
 
+[project.optional-dependencies]
+# ZED cameras: must match ZED SDK's major.minor version (system install).
+zed-5-4 = ["lerobot_camera_zed", "pyzed; sys_platform == 'linux' and python_version < '3.15' and (platform_machine == 'x86_64' or platform_machine == 'aarch64')"]
+zed-5-5 = ["lerobot_camera_zed", "pyzed; sys_platform == 'linux' and python_version < '3.15' and (platform_machine == 'x86_64' or platform_machine == 'aarch64')"]
+
+
 [tool.uv.sources]
 lerobot_robot_trossen = { workspace = true }
 lerobot_teleoperator_trossen = { workspace = true }
+lerobot_camera_zed = { git = "https://github.com/stereolabs/lerobot_camera_zed" }
+# ZED cameras: must match ZED SDK's major.minor version (system install).
+pyzed = [
+  { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_x86_64/pyzed-5.4-cp312-cp312-linux_x86_64.whl", marker = "python_version == '3.12' and platform_machine == 'x86_64'", extra = "zed-5-4" },
+  { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_x86_64/pyzed-5.4-cp313-cp313-linux_x86_64.whl", marker = "python_version == '3.13' and platform_machine == 'x86_64'", extra = "zed-5-4" },
+  { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_aarch64/pyzed-5.4-cp312-cp312-linux_aarch64.whl", marker = "python_version == '3.12' and platform_machine == 'aarch64'", extra = "zed-5-4" },
+  { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_aarch64/pyzed-5.4-cp313-cp313-linux_aarch64.whl", marker = "python_version == '3.13' and platform_machine == 'aarch64'", extra = "zed-5-4" },
+  { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_x86_64/pyzed-5.4-cp314-cp314-linux_x86_64.whl", marker = "python_version == '3.14' and platform_machine == 'x86_64'", extra = "zed-5-4" },
+  { url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_aarch64/pyzed-5.4-cp314-cp314-linux_aarch64.whl", marker = "python_version == '3.14' and platform_machine == 'aarch64'", extra = "zed-5-4" },
+  { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_x86_64/pyzed-5.5-cp312-cp312-linux_x86_64.whl", marker = "python_version == '3.12' and platform_machine == 'x86_64'", extra = "zed-5-5" },
+  { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_x86_64/pyzed-5.5-cp313-cp313-linux_x86_64.whl", marker = "python_version == '3.13' and platform_machine == 'x86_64'", extra = "zed-5-5" },
+  { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_aarch64/pyzed-5.5-cp312-cp312-linux_aarch64.whl", marker = "python_version == '3.12' and platform_machine == 'aarch64'", extra = "zed-5-5" },
+  { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_aarch64/pyzed-5.5-cp313-cp313-linux_aarch64.whl", marker = "python_version == '3.13' and platform_machine == 'aarch64'", extra = "zed-5-5" },
+  { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_x86_64/pyzed-5.5-cp314-cp314-linux_x86_64.whl", marker = "python_version == '3.14' and platform_machine == 'x86_64'", extra = "zed-5-5" },
+  { url = "https://download.stereolabs.com/zedsdk/5.5/whl/linux_aarch64/pyzed-5.5-cp314-cp314-linux_aarch64.whl", marker = "python_version == '3.14' and platform_machine == 'aarch64'", extra = "zed-5-5" },
+]
+
+[tool.uv]
+conflicts = [[{ extra = "zed-5-4" }, { extra = "zed-5-5" }]]
 
 [tool.uv.workspace]
 members = ["packages/*"]
