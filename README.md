@@ -2,9 +2,9 @@
 
 ## Overview
 
-This package contains LeRobot integrations for the Trossen AI series of robots.
+This package contains LeRobot integrations for Trossen Robotics arms: the WidowX Core, Pro, Heavy, and AI followers, the Glide and WidowX Core leaders, and the Mobile AI robots.
 See the [LeRobot documentation](https://huggingface.co/docs/lerobot) for details on more advanced usage like using the HuggingFace Hub, model training, and using different teleoperation methods.
-See the [Trossen AI documentation](https://docs.trossenrobotics.com/trossen_arm/main/tutorials/lerobot_plugin.html) for details on configuration and usage of Trossen AI robots with LeRobot.
+See the [Trossen AI documentation](https://docs.trossenrobotics.com/trossen_arm/main/tutorials/lerobot_plugin.html) for details on configuration and usage of Trossen robots with LeRobot.
 
 ## Installation
 
@@ -23,6 +23,9 @@ git clone https://github.com/TrossenRobotics/lerobot_trossen.git
 # Install the trossen lerobot packages and their dependencies
 uv sync
 
+# Or, if you use Intel RealSense cameras (type: intelrealsense), include the RealSense dependencies:
+# uv sync --extra realsense
+
 # Verify installation
 uv pip list | grep trossen
 # lerobot-robot-trossen
@@ -30,6 +33,33 @@ uv pip list | grep trossen
 # trossen-arm
 # trossen-slate
 ```
+
+## Supported Hardware
+
+The examples below use a **WidowX AI leader** teleoperating a **WidowX AI follower**.
+To use a different arm, swap the `--robot.type` and `--teleop.type` values for any of the types listed here.
+All other arguments stay the same.
+
+### Followers (`--robot.type`)
+
+| Arm | Single arm | Bimanual |
+| --- | ---------- | -------- |
+| WidowX Core | `widowxcore_follower_robot` | `bi_widowxcore_follower_robot` |
+| WidowX Pro | `widowxpro_follower_robot` | `bi_widowxpro_follower_robot` |
+| WidowX Heavy | `widowxheavy_follower_robot` | `bi_widowxheavy_follower_robot` |
+| WidowX AI | `widowxai_follower_robot` | `bi_widowxai_follower_robot` |
+| Mobile AI | — | `mobileai_robot` |
+
+
+### Leaders (`--teleop.type`)
+
+| Arm | Single arm | Bimanual |
+| --- | ---------- | -------- |
+| Glide | `glideleft_leader_teleop` or `glideright_leader_teleop` | `bi_glide_leader_teleop` |
+| WidowX Core | `widowxcore_leader_teleop` | `bi_widowxcore_leader_teleop` |
+| WidowX AI | `widowxai_leader_teleop` | `bi_widowxai_leader_teleop` |
+| Mobile AI | — | `mobileai_leader_teleop` |
+
 
 ## Usage
 
@@ -99,7 +129,7 @@ uv run lerobot-record \
 
 ### Optional Observation Features
 
-By default, WidowX AI followers only observe joint positions (`<joint>.pos`).
+By default, followers only observe joint positions (`<joint>.pos`).
 You can optionally record additional per-joint signals by enabling the following flags.
 All are disabled by default.
 
@@ -126,7 +156,7 @@ uv run lerobot-record \
   --teleop.id=leader
 ```
 
-The same flags are available on the bimanual (`bi_widowxai_follower_robot`) and Mobile AI (`mobileai_robot`) configurations, where they are shared across both arms.
+The same flags are available on every follower type, including the bimanual (`bi_*_follower_robot`) and Mobile AI (`mobileai_robot`) configurations, where they are shared across both arms.
 The resulting observation keys are prefixed per arm, e.g. `left_<joint>.eff` and `right_<joint>.eff`.
 
 ### Dataset Visualization
