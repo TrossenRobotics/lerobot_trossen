@@ -34,6 +34,7 @@ class RivetRobot(Robot):
 
         # Only require this dependency if this robot is being used
         import trossen_base
+
         self.base = trossen_base.TrossenBase()
 
         self.cameras = make_cameras_from_configs(config.cameras)
@@ -96,8 +97,14 @@ class RivetRobot(Robot):
         # Get base observations
         velocity = self.base.get_odometry().velocity
         lift_velocity = self.base.get_lift_state().velocity
-        obs_dict.update({"x.vel": velocity[0], "y.vel": velocity[1], "theta.vel": velocity[2],
-                         "lift.vel": lift_velocity})
+        obs_dict.update(
+            {
+                "x.vel": velocity[0],
+                "y.vel": velocity[1],
+                "theta.vel": velocity[2],
+                "lift.vel": lift_velocity,
+            }
+        )
 
         # read_latest*() is a non-blocking peek of the latest frame; depth cameras also yield "<cam>_depth".
         for cam_key, cam in self.cameras.items():
@@ -121,7 +128,9 @@ class RivetRobot(Robot):
         action_base_y_vel = action.get("y.vel", 0.0)
         action_base_theta_vel = action.get("theta.vel", 0.0)
         action_base_lift_vel = action.get("lift.vel", 0.0)
-        self.base.set_velocities([action_base_x_vel, action_base_y_vel, action_base_theta_vel])
+        self.base.set_velocities(
+            [action_base_x_vel, action_base_y_vel, action_base_theta_vel]
+        )
         self.base.set_lift_velocity(action_base_lift_vel)
         return {
             "x.vel": action_base_x_vel,
