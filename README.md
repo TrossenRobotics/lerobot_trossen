@@ -23,7 +23,7 @@ git clone https://github.com/TrossenRobotics/lerobot_trossen.git
 # Install the trossen lerobot packages and their dependencies
 uv sync
 
-# Or, if you use Intel RealSense cameras (type: intelrealsense), include the RealSense dependencies:
+# Or, if you use RealSense cameras (type: intelrealsense), include the RealSense dependencies:
 # uv sync --extra realsense
 
 # Verify installation
@@ -37,8 +37,7 @@ uv pip list | grep trossen
 ## Supported Hardware
 
 The examples below use a **WidowX AI leader** teleoperating a **WidowX AI follower**.
-To use a different arm, swap the `--robot.type` and `--teleop.type` values for any of the types listed here.
-All other arguments stay the same.
+To use a different arm, swap the `--robot.type` and `--teleop.type` values for any of the types listed here. When switching to a bimanual or mobile robot, replace `--robot.ip_address` with `--robot.left_arm_ip_address` and `--robot.right_arm_ip_address`; likewise, replace `--teleop.ip_address` with `--teleop.left_arm_ip_address` and `--teleop.right_arm_ip_address` when switching the teleoperator.
 
 ### Followers (`--robot.type`)
 

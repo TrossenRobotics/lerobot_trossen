@@ -8,7 +8,7 @@ class GlideLeaderTeleopConfig(TeleoperatorConfig):
     # IP address of the arm
     ip_address: str
 
-    # Joint names for the WidowX leader arm
+    # Joint names for the Glide leader arm
     joint_names: list[str] = field(
         default_factory=lambda: [
             "joint_0",
@@ -21,7 +21,7 @@ class GlideLeaderTeleopConfig(TeleoperatorConfig):
         ]
     )
 
-    # The effort that the Glide trigger maintains against the finger.
+    # The effort (N) that the Glide trigger maintains against the finger.
     glide_trigger_effort: float = 6.5
 
 
