@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 
+import numpy as np
 from lerobot.cameras import CameraConfig
 from lerobot.robots.config import RobotConfig
 
@@ -13,8 +14,8 @@ class BiWidowXFollowerRobotConfig(RobotConfig):
 
     # `max_relative_target` limits the magnitude of the relative positional target vector for
     # safety purposes. Set this to a positive scalar to have the same value for all motors
-    left_arm_max_relative_target: float | None = 0.2
-    right_arm_max_relative_target: float | None = 0.2
+    left_arm_max_relative_target: float | None = None
+    right_arm_max_relative_target: float | None = None
 
     # Multiplier for computing minimum time (in seconds) for the arm to reach a target position.
     # The final goal time is computed as: min_time_to_move = multiplier / fps.
@@ -77,10 +78,10 @@ class BiWidowXFollowerRobotConfig(RobotConfig):
     # The arms will move to these positions when first started and before they are sent to the
     # sleep position.
     left_arm_staged_positions: list[float] = field(
-        default_factory=lambda: [0, 0, 0, 0, 0, 0, 0]
+        default_factory=lambda: [0, 0, 0, 0, 0, -np.pi / 4, 0]
     )
     right_arm_staged_positions: list[float] = field(
-        default_factory=lambda: [0, 0, 0, 0, 0, 0, 0]
+        default_factory=lambda: [0, 0, 0, 0, 0, np.pi / 4, 0]
     )
 
 

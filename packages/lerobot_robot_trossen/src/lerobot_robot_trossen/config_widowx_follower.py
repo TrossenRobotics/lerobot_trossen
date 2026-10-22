@@ -11,8 +11,9 @@ class WidowXFollowerConfig(RobotConfig):
     ip_address: str
 
     # `max_relative_target` limits the magnitude of the relative positional target vector for
-    # safety purposes. Set this to a positive scalar to have the same value for all motors
-    max_relative_target: float | None = 0.2
+    # safety purposes. Set this to a positive scalar to have the same value for all motors or None
+    # to have no limit.
+    max_relative_target: float | None = None
 
     # Multiplier for computing minimum time (in seconds) for the arm to reach a target position.
     # The final goal time is computed as: min_time_to_move = multiplier / fps.
