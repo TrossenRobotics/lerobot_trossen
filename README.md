@@ -23,9 +23,6 @@ git clone https://github.com/TrossenRobotics/lerobot_trossen.git
 # Install the trossen lerobot packages and their dependencies
 uv sync
 
-# Or, if you use RealSense cameras (type: intelrealsense), include the RealSense dependencies:
-# uv sync --extra realsense
-
 # Verify installation
 uv pip list | grep trossen
 # lerobot-robot-trossen
