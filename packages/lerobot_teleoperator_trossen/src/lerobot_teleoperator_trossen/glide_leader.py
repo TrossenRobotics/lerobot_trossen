@@ -1,18 +1,13 @@
-import logging
-
 import trossen_arm
-from lerobot.utils.errors import DeviceNotConnectedError
 
 from lerobot_teleoperator_trossen.config_glide_leader import (
     GlideLeftLeaderTeleopConfig,
     GlideRightLeaderTeleopConfig,
 )
-from lerobot_teleoperator_trossen.widowx_leader import WidowXLeaderTeleop
-
-logger = logging.getLogger(__name__)
+from lerobot_teleoperator_trossen.trossen_leader import TrossenLeaderTeleop
 
 
-class GlideLeaderTeleop(WidowXLeaderTeleop):
+class GlideLeaderTeleop(TrossenLeaderTeleop):
     """
     [Glide](https://www.trossenrobotics.com/glide-cockpit) Abstract class by Trossen Robotics
     """
@@ -22,13 +17,6 @@ class GlideLeaderTeleop(WidowXLeaderTeleop):
         self.driver.set_gripper_effort(
             self.config.glide_trigger_effort, goal_time=0.0, blocking=True
         )
-
-    def disconnect(self) -> None:
-        if not self.is_connected:
-            raise DeviceNotConnectedError(f"{self} is not connected.")
-
-        self.driver.cleanup()
-        logger.info(f"{self} disconnected.")
 
 
 # TODO(@schromya): Add add proper end-effectors for each model when released

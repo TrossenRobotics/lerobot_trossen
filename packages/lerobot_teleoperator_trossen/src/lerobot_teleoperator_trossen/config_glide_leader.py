@@ -1,25 +1,13 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from lerobot.teleoperators.config import TeleoperatorConfig
 
+from lerobot_teleoperator_trossen.config_trossen_leader import TrossenLeaderTeleopConfig
+
 
 @dataclass
-class GlideLeaderTeleopConfig(TeleoperatorConfig):
-    # IP address of the arm
-    ip_address: str
-
-    # Joint names for the Glide leader arm
-    joint_names: list[str] = field(
-        default_factory=lambda: [
-            "joint_0",
-            "joint_1",
-            "joint_2",
-            "joint_3",
-            "joint_4",
-            "joint_5",
-            "left_carriage_joint",
-        ]
-    )
+class GlideLeaderTeleopConfig(TrossenLeaderTeleopConfig):
+    # IP address and joint names are in TrossenLeaderTeleopConfig
 
     # The effort (N) that the Glide trigger maintains against the finger.
     glide_trigger_effort: float = 6.5
