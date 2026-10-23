@@ -563,7 +563,7 @@ intelrealsense = [
 [[package]]
 name = "lerobot-camera-zed"
 version = "0.1.0"
-source = { git = "https://github.com/stereolabs/lerobot_camera_zed#c5fc6f59033630f8425cb96f96e140618317cc20" }
+source = { git = "https://github.com/schromya/lerobot_camera_zed?rev=bcb8f99dc7ab19c21fc6bf26b21e83a95d022a77#bcb8f99dc7ab19c21fc6bf26b21e83a95d022a77" }
 dependencies = [
     { name = "lerobot" },
 ]
@@ -626,8 +626,8 @@ zed-5-5 = [
 
 [package.metadata]
 requires-dist = [
-    { name = "lerobot-camera-zed", marker = "extra == 'zed-5-4'", git = "https://github.com/stereolabs/lerobot_camera_zed" },
-    { name = "lerobot-camera-zed", marker = "extra == 'zed-5-5'", git = "https://github.com/stereolabs/lerobot_camera_zed" },
+    { name = "lerobot-camera-zed", marker = "extra == 'zed-5-4'", git = "https://github.com/schromya/lerobot_camera_zed?rev=bcb8f99dc7ab19c21fc6bf26b21e83a95d022a77" },
+    { name = "lerobot-camera-zed", marker = "extra == 'zed-5-5'", git = "https://github.com/schromya/lerobot_camera_zed?rev=bcb8f99dc7ab19c21fc6bf26b21e83a95d022a77" },
     { name = "lerobot-robot-trossen", editable = "packages/lerobot_robot_trossen" },
     { name = "lerobot-teleoperator-trossen", editable = "packages/lerobot_teleoperator_trossen" },
     { name = "pyzed", marker = "python_full_version == '3.12.*' and platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'zed-5-4'", url = "https://download.stereolabs.com/zedsdk/5.4/whl/linux_aarch64/pyzed-5.4-cp312-cp312-linux_aarch64.whl" },
