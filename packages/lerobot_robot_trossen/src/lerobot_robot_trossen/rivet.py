@@ -44,6 +44,11 @@ class RivetRobot(Robot):
         return {"x.vel": float, "y.vel": float, "theta.vel": float, "lift.vel": float}
 
     @property
+    def _base_obs_ft(self) -> dict[str, type]:
+        # Odometry position is observed but not commanded
+        return {"x.pos": float, "y.pos": float, "theta.pos": float, **self._base_ft}
+
+    @property
     def _cameras_ft(self) -> dict[str, tuple]:
         # Depth cameras add a separate (H, W, 1) "<cam>_depth" feature; single channel flags it as depth.
         features: dict[str, tuple] = {}
@@ -56,7 +61,7 @@ class RivetRobot(Robot):
 
     @property
     def observation_features(self) -> dict[str, type | tuple]:
-        return {**self._base_ft, **self._cameras_ft}
+        return {**self._base_obs_ft, **self._cameras_ft}
 
     @property
     def action_features(self) -> dict[str, type]:
@@ -73,7 +78,7 @@ class RivetRobot(Robot):
             cam.connect()
 
         # Configure the base last so the heartbeat is not starved by slower connections
-        self.base.configure(use_lidar=False)
+        self.base.configure(use_lidar=True)
         self.base.heartbeat()
 
     @property
@@ -89,16 +94,26 @@ class RivetRobot(Robot):
         # The base does not require configuration
         pass
 
+    def reset_odometry(self) -> None:
+        # Zero the base position and heading
+        if not self.base.reset_odometry():
+            raise RuntimeError(f"{self} failed to reset odometry")
+
     def get_observation(self) -> dict[str, Any]:
         self.base.heartbeat()
 
         obs_dict = {}
 
         # Get base observations
-        velocity = self.base.get_odometry().velocity
+        odometry = self.base.get_odometry()
+        position = odometry.position
+        velocity = odometry.velocity
         lift_velocity = self.base.get_lift_state().velocity
         obs_dict.update(
             {
+                "x.pos": position[0],
+                "y.pos": position[1],
+                "theta.pos": position[2],
                 "x.vel": velocity[0],
                 "y.vel": velocity[1],
                 "theta.vel": velocity[2],
