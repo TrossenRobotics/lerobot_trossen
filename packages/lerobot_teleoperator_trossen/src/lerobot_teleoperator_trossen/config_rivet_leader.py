@@ -14,7 +14,7 @@ class RivetGlideLeaderTeleopConfig(BiGlideLeaderRobotConfig):
     max_linear_velocity: float = 0.8
 
     # Maximum angular velocity that can be commanded (rad/s).
-    max_angular_velocity: float = 1.0
+    max_angular_velocity: float = 2.2
 
     # Velocity the lift goal moves at while a lift button is held (m/s).
     max_lift_velocity: float = 0.2
