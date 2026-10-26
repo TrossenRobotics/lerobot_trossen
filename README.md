@@ -127,6 +127,8 @@ uv run lerobot-record \
   --dataset.single_task="Grab and handover the red cube to the other arm"
 ```
 
+When recording with a Rivet, use `lerobot-rivet-record` instead of `lerobot-record`. It takes the same arguments, but also resets the base odometry at the start of every episode so `x.pos`, `y.pos`, and `theta.pos` are relative to where the episode began.
+
 ### Optional Observation Features
 
 By default, followers only observe joint positions (`<joint>.pos`).

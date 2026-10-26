@@ -23,7 +23,11 @@ dependencies = [
   "lerobot[intelrealsense]>=0.6.0; sys_platform != 'linux' or platform_machine != 'aarch64'"
 ]
 
+[project.scripts]
+# lerobot-record that also resets the Rivet odometry at the start of every episode.
+lerobot-rivet-record = "lerobot_robot_trossen.scripts.lerobot_rivet_record:main"
+
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["lerobot_robot_trossen"]
+include = ["lerobot_robot_trossen*"]
