@@ -1,4 +1,5 @@
 import logging
+import time
 from functools import cached_property
 
 from lerobot_teleoperator_trossen.config_rivet_leader import (
@@ -40,13 +41,17 @@ class RivetGlideLeaderTeleop(BiGlideLeaderRobot):
     def __init__(self, config: RivetGlideLeaderTeleopConfig):
         super().__init__(config)
 
+        # The Glide has no absolute lift input, so the buttons move this goal position
+        self._lift_position = config.lift_staged_position
+        self._last_lift_t = None
+
     @cached_property
     def action_features(self) -> dict[str, type]:
         features = super().action_features
         features["x.vel"] = float
         features["y.vel"] = float
         features["theta.vel"] = float
-        features["lift.vel"] = float
+        features["lift.pos"] = float
         return features
 
     def get_action(self) -> dict[str, float]:
@@ -81,16 +86,25 @@ class RivetGlideLeaderTeleop(BiGlideLeaderRobot):
             self.config.max_angular_velocity,
             self.config.angular_deadzone,
         )
-        action_base_lift_vel = (
-            right_up_btn - right_down_btn
-        ) * self.config.max_lift_velocity
+        # Move the lift goal while a button is held, clamped to the configured range
+        now = time.perf_counter()
+        dt = 0.0 if self._last_lift_t is None else now - self._last_lift_t
+        self._last_lift_t = now
+        self._lift_position = min(
+            max(
+                self._lift_position
+                + (right_up_btn - right_down_btn) * self.config.max_lift_velocity * dt,
+                self.config.min_lift_position,
+            ),
+            self.config.max_lift_position,
+        )
 
         action.update(
             {
                 "x.vel": action_base_x_vel,
                 "y.vel": action_base_y_vel,
                 "theta.vel": action_base_theta_vel,
-                "lift.vel": action_base_lift_vel,
+                "lift.pos": self._lift_position,
             }
         )
         return action

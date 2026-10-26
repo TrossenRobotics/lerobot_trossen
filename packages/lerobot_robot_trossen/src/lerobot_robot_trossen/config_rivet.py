@@ -15,6 +15,12 @@ class RivetRobotConfig(RobotConfig):
     # cameras
     cameras: dict[str, CameraConfig] = field(default_factory=dict)
 
+    # Lift position to move to on connect (m above the bottom soft bound).
+    lift_staged_position: float = 0.5
+
+    # Cruise velocity used when moving the lift to a commanded position (m/s).
+    lift_velocity: float = 0.2
+
 
 # Shared configuration for all Rivet robots with WidowX arms.
 @dataclass

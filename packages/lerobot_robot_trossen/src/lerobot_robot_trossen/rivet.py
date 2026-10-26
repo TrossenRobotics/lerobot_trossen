@@ -19,6 +19,10 @@ from lerobot_robot_trossen.config_rivet import (
 
 logger = logging.getLogger(__name__)
 
+LIFT_POSITION_TOLERANCE = (
+    0.005  # Lift is considered at its goal within this distance (m)
+)
+
 
 class RivetRobot(Robot):
     """
@@ -41,12 +45,18 @@ class RivetRobot(Robot):
 
     @property
     def _base_ft(self) -> dict[str, type]:
-        return {"x.vel": float, "y.vel": float, "theta.vel": float, "lift.vel": float}
+        return {"x.vel": float, "y.vel": float, "theta.vel": float, "lift.pos": float}
 
     @property
     def _base_obs_ft(self) -> dict[str, type]:
-        # Odometry position is observed but not commanded
-        return {"x.pos": float, "y.pos": float, "theta.pos": float, **self._base_ft}
+        # Odometry position and lift velocity are observed but not commanded
+        return {
+            "x.pos": float,
+            "y.pos": float,
+            "theta.pos": float,
+            **self._base_ft,
+            "lift.vel": float,
+        }
 
     @property
     def _cameras_ft(self) -> dict[str, tuple]:
@@ -81,6 +91,18 @@ class RivetRobot(Robot):
         self.base.configure(use_lidar=True)
         self.base.heartbeat()
 
+        # Move the lift to the staged position and wait for it to arrive
+        if not self.base.set_lift_position(
+            self.config.lift_staged_position, self.config.lift_velocity
+        ):
+            raise RuntimeError(f"{self} failed to command lift to staged position")
+        while (
+            abs(self.base.get_lift_state().position - self.config.lift_staged_position)
+            > LIFT_POSITION_TOLERANCE
+        ):
+            self.base.heartbeat()
+            time.sleep(0.01)
+
     @property
     def is_calibrated(self) -> bool:
         # The base does not require calibration
@@ -108,7 +130,7 @@ class RivetRobot(Robot):
         odometry = self.base.get_odometry()
         position = odometry.position
         velocity = odometry.velocity
-        lift_velocity = self.base.get_lift_state().velocity
+        lift_state = self.base.get_lift_state()
         obs_dict.update(
             {
                 "x.pos": position[0],
@@ -117,7 +139,8 @@ class RivetRobot(Robot):
                 "x.vel": velocity[0],
                 "y.vel": velocity[1],
                 "theta.vel": velocity[2],
-                "lift.vel": lift_velocity,
+                "lift.pos": lift_state.position,
+                "lift.vel": lift_state.velocity,
             }
         )
 
@@ -142,16 +165,16 @@ class RivetRobot(Robot):
         action_base_x_vel = action.get("x.vel", 0.0)
         action_base_y_vel = action.get("y.vel", 0.0)
         action_base_theta_vel = action.get("theta.vel", 0.0)
-        action_base_lift_vel = action.get("lift.vel", 0.0)
+        action_base_lift_pos = action["lift.pos"]
         self.base.set_velocities(
             [action_base_x_vel, action_base_y_vel, action_base_theta_vel]
         )
-        self.base.set_lift_velocity(action_base_lift_vel)
+        self.base.set_lift_position(action_base_lift_pos, self.config.lift_velocity)
         return {
             "x.vel": action_base_x_vel,
             "y.vel": action_base_y_vel,
             "theta.vel": action_base_theta_vel,
-            "lift.vel": action_base_lift_vel,
+            "lift.pos": action_base_lift_pos,
         }
 
     def disconnect(self):
