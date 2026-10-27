@@ -257,8 +257,12 @@ class RivetWidowXRobot(RivetRobot):
         return {**send_action_arms, **super().send_action(action)}
 
     def disconnect(self):
-        # Stop the base before releasing the arms
-        super().disconnect()
+        try:
+            # Stop the base before releasing the arms
+            super().disconnect()
+        except Exception as e:
+            # We log a warning but continue with disconnect
+            logger.warning(f"Error while disconnecting Rivet and Cameras: {e}")
 
         try:
             self.arms.disconnect()
