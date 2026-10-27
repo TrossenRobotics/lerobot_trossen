@@ -49,7 +49,7 @@ uv pip list | grep trossen
 4. [JETSON ONLY]  If you are on a Jetson, the `NEURAL` depth modes also need the ZED AI and TensorRT libraries on the library path:
 
     ```shell
-    export LD_LIBRARY_PATH=/usr/local/cuda-12/targets/aarch64-linux/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
     ```
 
 ## Supported Hardware
