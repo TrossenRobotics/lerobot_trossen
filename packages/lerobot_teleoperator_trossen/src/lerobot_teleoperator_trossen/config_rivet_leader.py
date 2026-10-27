@@ -27,7 +27,7 @@ class RivetGlideLeaderTeleopConfig(BiGlideLeaderRobotConfig):
     lift_staged_position: float = 0.5
 
     # Linear Velocities set to 0 if input is less then this value (m/s).
-    linear_deadzone: float = 0.01
+    linear_deadzone: float = 0.03
 
     # Angular Velocities set to 0 if input is less then this value (rad/s).
     angular_deadzone: float = 0.05
