@@ -2,7 +2,7 @@
 
 ## Overview
 
-This package contains LeRobot integrations for Trossen Robotics arms: the WidowX Core, Pro, Heavy, and AI followers, the Glide and WidowX Core leaders, and the Mobile AI robots.
+This package contains LeRobot integrations for Trossen Robotics arms: the WidowX Core, Pro, Heavy, and AI followers, the Glide and WidowX Core leaders, and the Rivet and Mobile robots.
 See the [LeRobot documentation](https://huggingface.co/docs/lerobot) for details on more advanced usage like using the HuggingFace Hub, model training, and using different teleoperation methods.
 See the [Trossen AI documentation](https://docs.trossenrobotics.com/trossen_arm/main/tutorials/lerobot_plugin.html) for details on configuration and usage of Trossen robots with LeRobot.
 
@@ -44,6 +44,9 @@ To use a different arm, swap the `--robot.type` and `--teleop.type` values for a
 | WidowX Pro | `widowxpro_follower_robot` | `bi_widowxpro_follower_robot` |
 | WidowX Heavy | `widowxheavy_follower_robot` | `bi_widowxheavy_follower_robot` |
 | WidowX AI | `widowxai_follower_robot` | `bi_widowxai_follower_robot` |
+| Rivet (base only, no arms) | — | `rivet_robot` |
+| Rivet with WidowX Core | — | `rivet_widowxcore_robot` |
+| Rivet with WidowX Pro | — | `rivet_widowxpro_robot` |
 | Mobile AI | — | `mobileai_robot` |
 
 
@@ -55,6 +58,7 @@ To use a different arm, swap the `--robot.type` and `--teleop.type` values for a
 | WidowX Core | `widowxcore_leader_teleop` | `bi_widowxcore_leader_teleop` |
 | WidowX AI | `widowxai_leader_teleop` | `bi_widowxai_leader_teleop` |
 | Mobile AI | — | `mobileai_leader_teleop` |
+| Rivet ( using Glides) | — | `bi_rivet_glide_leader_teleop` |
 
 
 ## Usage
@@ -122,6 +126,8 @@ uv run lerobot-record \
   --dataset.reset_time_s=15 \
   --dataset.single_task="Grab and handover the red cube to the other arm"
 ```
+
+When recording with a Rivet, use `lerobot-rivet-record` instead of `lerobot-record`. It takes the same arguments, but also resets the base odometry at the start of every episode so `x.pos`, `y.pos`, and `theta.pos` are relative to where the episode began.
 
 ### Optional Observation Features
 
