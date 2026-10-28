@@ -30,4 +30,4 @@ class RivetGlideLeaderTeleopConfig(BiGlideLeaderRobotConfig):
     linear_deadzone: float = 0.03
 
     # Angular Velocities set to 0 if input is less then this value (rad/s).
-    angular_deadzone: float = 0.05
+    angular_deadzone: float = 0.2
