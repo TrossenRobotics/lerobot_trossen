@@ -16,12 +16,14 @@ from lerobot_robot_trossen.config_rivet import (
     RivetWidowXRobotConfig,
 )
 
-
 logger = logging.getLogger(__name__)
 
-LIFT_POSITION_TOLERANCE = (
-    0.005  # Lift is considered at its goal within this distance (m)
-)
+# Lift is considered at its goal within this distance (m)
+LIFT_POSITION_TOLERANCE = 0.005
+# Odometry is considered zeroed within this tolerance (m, rad)
+ODOMETRY_RESET_TOLERANCE = 0.001
+# Max time to wait for the odometry to report the reset
+ODOMETRY_RESET_TIMEOUT_S = 1.0
 
 
 class RivetRobot(Robot):
@@ -91,7 +93,11 @@ class RivetRobot(Robot):
         self.base.configure(use_lidar=True)
         self.base.heartbeat()
 
-        # Move the lift to the staged position and wait for it to arrive
+        self.configure()
+
+    def configure(self, reset_odometry: bool = True) -> None:
+        # Move the lift to the staged position and wait for it to arrive. If reset_odometry=True,
+        # resets the odometry to zero.
         if not self.base.set_lift_position(
             self.config.lift_staged_position, self.config.lift_velocity
         ):
@@ -103,6 +109,10 @@ class RivetRobot(Robot):
             self.base.heartbeat()
             time.sleep(0.01)
 
+        # Reset odometry to zero
+        if reset_odometry:
+            self.reset_odometry(blocking=True)
+
     @property
     def is_calibrated(self) -> bool:
         # The base does not require calibration
@@ -112,14 +122,25 @@ class RivetRobot(Robot):
         # The base does not require calibration
         pass
 
-    def configure(self) -> None:
-        # The base does not require configuration
-        pass
-
-    def reset_odometry(self) -> None:
-        # Zero the base position and heading
+    def reset_odometry(self, blocking: bool = False) -> None:
+        # Zero the base position and heading. If blocking=True, wait for the odometry to report
+        # zeroed.
         if not self.base.reset_odometry():
             raise RuntimeError(f"{self} failed to reset odometry")
+
+        if blocking:
+            deadline = time.perf_counter() + ODOMETRY_RESET_TIMEOUT_S
+            while True:
+                self.base.heartbeat()
+                position = self.base.get_odometry().position
+                if all(abs(p) <= ODOMETRY_RESET_TOLERANCE for p in position):
+                    return
+                if time.perf_counter() > deadline:
+                    raise RuntimeError(
+                        f"{self} odometry did not reset within {ODOMETRY_RESET_TIMEOUT_S}s "
+                        f"(x, y, theta = {tuple(position)})"
+                    )
+                time.sleep(0.01)
 
     def get_observation(self) -> dict[str, Any]:
         self.base.heartbeat()
@@ -234,7 +255,15 @@ class RivetWidowXRobot(RivetRobot):
 
     def connect(self, calibrate: bool = True) -> None:
         self.arms.connect(calibrate=calibrate)
-        super().connect(calibrate=calibrate)
+
+        for cam in self.cameras.values():
+            cam.connect()
+
+        # Configure the base last so the heartbeat is not starved by slower connections
+        self.base.configure(use_lidar=True)
+        self.base.heartbeat()
+
+        super().configure()
 
     @property
     def is_calibrated(self) -> bool:
@@ -246,7 +275,8 @@ class RivetWidowXRobot(RivetRobot):
         # consistency
         self.arms.calibrate()
 
-    def configure(self) -> None:
+    def configure(self, reset_odometry: bool = True) -> None:
+        super().configure(reset_odometry=reset_odometry)
         # Set the arm to position control mode
         self.arms.configure()
 
