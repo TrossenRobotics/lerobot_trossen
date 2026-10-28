@@ -1,6 +1,4 @@
-from lerobot.teleoperators.teleoperator import Teleoperator
-
-from lerobot_teleoperator_trossen.bi_widowx_leader import BiWidowXLeaderRobot
+from lerobot_teleoperator_trossen.bi_trossen_leader import BiTrossenLeaderRobot
 from lerobot_teleoperator_trossen.config_bi_glide_leader import BiGlideLeaderRobotConfig
 from lerobot_teleoperator_trossen.glide_leader import (
     GlideLeftLeaderTeleop,
@@ -8,7 +6,7 @@ from lerobot_teleoperator_trossen.glide_leader import (
 )
 
 
-class BiGlideLeaderRobot(BiWidowXLeaderRobot):
+class BiGlideLeaderRobot(BiTrossenLeaderRobot):
     """
     [Bimanual Glide Leaders](https://www.trossenrobotics.com/glide-cockpit) by Trossen Robotics
     """
@@ -19,8 +17,7 @@ class BiGlideLeaderRobot(BiWidowXLeaderRobot):
     right_arm_class = GlideRightLeaderTeleop
 
     def __init__(self, config: BiGlideLeaderRobotConfig):
-        Teleoperator.__init__(self, config)
-        self.config = config
+        super().__init__(config)
 
         left_arm_config = self.left_arm_class.config_class(
             id=f"{config.id}_left" if config.id else None,
