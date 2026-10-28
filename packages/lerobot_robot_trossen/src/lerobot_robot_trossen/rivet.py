@@ -165,17 +165,22 @@ class RivetRobot(Robot):
         action_base_x_vel = action.get("x.vel", 0.0)
         action_base_y_vel = action.get("y.vel", 0.0)
         action_base_theta_vel = action.get("theta.vel", 0.0)
-        action_base_lift_pos = action["lift.pos"]
+        action_base_lift_pos = action.get("lift.pos")
+
         self.base.set_velocities(
             [action_base_x_vel, action_base_y_vel, action_base_theta_vel]
         )
-        self.base.set_lift_position(action_base_lift_pos, self.config.lift_velocity)
-        return {
+        sent_actions = {
             "x.vel": action_base_x_vel,
             "y.vel": action_base_y_vel,
             "theta.vel": action_base_theta_vel,
-            "lift.pos": action_base_lift_pos,
         }
+
+        if action_base_lift_pos is not None:
+            self.base.set_lift_position(action_base_lift_pos, self.config.lift_velocity)
+            sent_actions["lift.pos"] = action_base_lift_pos
+
+        return sent_actions
 
     def disconnect(self):
         # Stop the base and cleanup the driver
