@@ -31,6 +31,27 @@ uv pip list | grep trossen
 # trossen-slate
 ```
 
+### ZED Cameras
+1. Install the ZED SDK [v5.4](https://www.stereolabs.com/en-fr/developers/release/5.4) or [v5.5](https://www.stereolabs.com/en-fr/developers/release/5.5).
+2. Install the additional ZED dependencies, using the extra that matches your ZED SDK version:
+
+   ```shell
+   uv sync --extra zed-5-5   # ZED SDK 5.5
+   uv sync --extra zed-5-4   # ZED SDK 5.4
+   ```
+
+3. Verify the installation by listing your cameras:
+
+   ```shell
+   uv run lerobot-find-zed-cameras
+   ```
+
+4. [JETSON ONLY]  If you are on a Jetson, the `NEURAL` depth modes also need the ZED AI and TensorRT libraries on the library path:
+
+    ```shell
+    export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+    ```
+
 ## Supported Hardware
 
 The examples below use a **WidowX AI leader** teleoperating a **WidowX AI follower**.
