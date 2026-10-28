@@ -45,6 +45,10 @@ class MobileAIRobot(Robot):
             include_effort=config.include_effort,
             include_external_effort=config.include_external_effort,
             cameras={},
+            left_arm_joint_names=config.left_arm_joint_names,
+            right_arm_joint_names=config.right_arm_joint_names,
+            left_arm_staged_positions=config.left_arm_staged_positions,
+            right_arm_staged_positions=config.right_arm_staged_positions,
         )
 
         self.arms = BiWidowXAIFollowerRobot(arms_config)
