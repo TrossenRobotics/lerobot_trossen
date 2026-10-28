@@ -1,7 +1,7 @@
 """lerobot-record that also zeroes the Rivet odometry at the start of every episode.
 
 Takes the same arguments as lerobot-record, e.g.
-`uv run lerobot-trossen-record --robot.type=rivet_robot ...`
+`uv run lerobot-rivet-record --robot.type=rivet_robot ...`
 """
 
 import time
