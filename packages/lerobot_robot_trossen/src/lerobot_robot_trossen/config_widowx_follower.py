@@ -41,7 +41,7 @@ class WidowXFollowerConfig(RobotConfig):
 
     # cameras
     cameras: dict[str, CameraConfig] = field(default_factory=dict)
-    # Troubleshooting: If one of your IntelRealSense cameras freeze during
+    # Troubleshooting: If one of your RealSense cameras freeze during
     # data recording due to bandwidth limit, you might need to plug the camera
     # on another USB hub or PCIe card.
 

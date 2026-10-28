@@ -19,8 +19,8 @@ dependencies = [
   "trossen_arm>=1.9.0",
   # SLATE base driver: Linux wheels only, and only needed by the Mobile AI robot.
   "trossen-slate>=0.0.3; sys_platform == 'linux'",
-  # Intel RealSense camera support: installed by default on Linux x86-64 only.
-  "lerobot[intelrealsense]>=0.6.0; sys_platform == 'linux' and platform_machine == 'x86_64'",
+  # RealSense camera support: not installed on Jetson
+  "lerobot[intelrealsense]>=0.6.0; sys_platform != 'linux' or platform_machine != 'aarch64'"
 ]
 
 
